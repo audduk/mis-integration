@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MedapLisObservationRequest version="6.1.147">
+  <Observation>
+    <ID>5</ID>
+    <RegDate>2015-12-15T10:18:29</RegDate>
+    <HisOrderID>0000023000000074222000020100006505570005</HisOrderID>
+    <OrderID>12300024</OrderID>
+    <SpecimenTypeID>3</SpecimenTypeID>
+    <SpecimenType>Сыворотка</SpecimenType>
+    <SpecimenSiteID>1</SpecimenSiteID>
+    <SpecimenSite>Левый глаз</SpecimenSite>
+    <PurposeID>2</PurposeID>
+    <Purpose>Исследования на кишечную группу</Purpose>
+    <Cito>false</Cito>
+    <InfoMessage>Проверка импорта инфомесседж</InfoMessage>
+    <Patient>
+      <RegCode>171076</RegCode>
+      <GivenName>Test</GivenName>
+      <FamilyName>TestGate6</FamilyName>
+      <MiddleName>Ariadna</MiddleName>
+      <Address>Акмолинская, АСТАНА, ул</Address>
+      <Phone>8-495-123-45-67</Phone>
+      <CellularPhone>7-916-838-38-38</CellularPhone>
+      <RelativePhone>8-495-123-55-77</RelativePhone>
+      <Gender>M</Gender>
+      <BirthDate>1978-01-04</BirthDate>
+      <ConditionID>2</ConditionID>
+      <Condition>Нездоровый</Condition>
+    </Patient>
+    <OrderingInstitution>
+      <ID></ID>
+      <LocalName>Медицинский блок Консультационный центр</LocalName>
+      <FullName />
+      <Code>108</Code>
+    </OrderingInstitution>
+    <OrderInfo>
+      <item>
+        <ServiceID>23000</ServiceID>
+        <Service>Определение аланинаминотрансферазы (АЛаТ) в сыворотке крови на анализаторе</Service>
+        <ServiceCode>B03.155.002</ServiceCode>
+        <CategoryID>7</CategoryID>
+        <Category>РДРЦ договор</Category>
+      </item>
+    </OrderInfo>
+  </Observation>
+</MedapLisObservationRequest>
