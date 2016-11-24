@@ -16,6 +16,8 @@
              http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+  <!-- ************ Используемые бины ************ -->
+  <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
 
   <!-- Вычитываем xml-файлы из каталога входящих отчетов (filter - файл "старше 2 минут) -->
   <file:inbound-channel-adapter id="lisReportFileInput"
@@ -24,6 +26,8 @@
                                 channel="lisReportFileInputChannel">
     <poller fixed-delay="50"/>
   </file:inbound-channel-adapter>
+
+  <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
 
   <channel id="lisReportFileInputChannel"/>
 
@@ -51,6 +55,29 @@
     </interceptors>
   </channel>
 
+  <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
+
+  <channel id="misPrescriptionStringChannel">
+    <interceptors>
+      <wire-tap channel="loggerChannel"/>
+    </interceptors>
+  </channel>
+
+  <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
+    <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
+    <transformer ref="ariadnaTransformerBean" method="transformToObservation"/>
+    <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
+    <transformer expression="payload.toString()"/>
+  </chain>
+
+  <channel id="observationStringChannel">
+    <interceptors>
+      <wire-tap channel="loggerChannel"/>
+    </interceptors>
+  </channel>
+
+  <!-- Конфигурация логгера -->
+
   <channel id="loggerChannel" datatype="java.lang.String"/>
 
   <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
@@ -60,21 +87,6 @@
 
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
-
-  <!-- ************ Используемые бины ************ -->
-
-  <beans:bean id="ageFileFilter" class="org.springframework.integration.file.filters.LastModifiedFileListFilter">
-    <beans:property name="age" value="120"/>
-  </beans:bean>
-
-  <beans:bean id="ariadnaJaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-    <beans:property name="contextPath" value="mis.integration.ariadna.data"/>
-  </beans:bean>
-
-  <beans:bean id="ariadnaTransformerBean" class="mis.integration.ariadna.Transformer"/>
-
-  <beans:bean id="misReportMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-    <beans:property name="contextPath" value="mis.lis.report"/>
-  </beans:bean>
+  <bridge input-channel="observationStringChannel" output-channel="nullChannel"/>
 
 </beans:beans>
