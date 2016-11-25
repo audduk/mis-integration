@@ -14,6 +14,6 @@ public class Md5Transformer {
     MessageDigest digest = MessageDigest.getInstance("MD5");
     digest.update(message.getPayload().getBytes());
     final String md5 = new BigInteger(1, digest.digest()).toString();
-    return "MD5 (" + message.getHeaders().get("output-file-name") +".XML) = " + md5;
+    return "MD5 (" + message.getHeaders().get("output-file-code") +".XML) = " + md5;
   }
 }
