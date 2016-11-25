@@ -1,10 +1,12 @@
 package mis.integration.ariadna.config;
 
+import mis.integration.ariadna.RequestFileNameGenerator;
 import mis.integration.ariadna.Transformer;
 import mis.lis.prescription.PrescriptionDTO;
 import mis.lis.report.Report;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.file.FileNameGenerator;
 import org.springframework.integration.file.filters.LastModifiedFileListFilter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
@@ -44,5 +46,15 @@ public class IntegrationConfig {
     LastModifiedFileListFilter result = new LastModifiedFileListFilter();
     result.setAge(120);
     return result;
+  }
+
+  @Bean(name = "xmlReportFileGenerator")
+  FileNameGenerator xmlReportFileGenerator() {
+    return new RequestFileNameGenerator("xml");
+  }
+
+  @Bean(name = "md5ReportFileGenerator")
+  FileNameGenerator md5ReportFileGenerator() {
+    return  new RequestFileNameGenerator("md5");
   }
 }

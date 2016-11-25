@@ -49,6 +49,15 @@
       <artifactId>spring-context</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.integration</groupId>
       <artifactId>spring-integration-file</artifactId>
     </dependency>
@@ -89,13 +98,6 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- Зависимость включает ссылку на пространство имен http://java.sun.com/xml/ns/javaee в web.xml -->
-    <dependency>
-      <groupId>net.sf.ehcache</groupId>
-      <artifactId>ehcache</artifactId>
-      <version>2.9.0</version>
       <scope>provided</scope>
     </dependency>
 
