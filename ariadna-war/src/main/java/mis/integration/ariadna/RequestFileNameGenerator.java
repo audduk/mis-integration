@@ -15,7 +15,7 @@ public class RequestFileNameGenerator implements FileNameGenerator {
 
   @Override
   public String generateFileName(Message<?> message) {
-    final String name = (String) message.getHeaders().get("output-file-name");
+    final String name = (String) message.getHeaders().get("output-file-code");
     return name + "." + extension;
   }
 }
