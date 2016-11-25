@@ -21,6 +21,13 @@
     </encoder>
   </appender>
 
+  <appender name="messagesAppender" class="ch.qos.logback.core.FileAppender">
+    <file>${catalina.home}/logs/ariadna_messages.log</file>
+    <encoder>
+      <Pattern>%date %level %logger{10} [%file:%line] %msg%n</Pattern>
+    </encoder>
+  </appender>
+
   <!-- Hibernate loggers by http://docs.jboss.org/hibernate/orm/4.3/topical/html/logging/Logging.html -->
   <logger name="org.hibernate" level="WARN" additivity="false">
     <appender-ref ref="sqlAppender"/>
@@ -29,6 +36,10 @@
   <logger name="java.sql" level="WARN">
     <appender-ref ref="sqlAppender"/>
     <appender-ref ref="consoleAppender"/>
+  </logger>
+
+  <logger name="org.springframework.integration.handler.LoggingHandler" level="DEBUG" additivity="false">
+    <appender-ref ref="messagesAppender"/>
   </logger>
 
   <!-- Root -->

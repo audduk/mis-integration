@@ -16,40 +16,24 @@
              http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
-  <!-- ************ Используемые бины ************ -->
+
+  <!-- Зависимости конфигурации (используемые бины) -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:import resource="logger-integration.xml"/>
 
-  <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
-
-  <channel id="lisReportFileInputChannel"/>
-
-  <file:file-to-string-transformer input-channel="lisReportFileInputChannel" output-channel="lisReportStringChannel"
-                                   delete-files="false"/>
-
-  <channel id="lisReportStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
-
-  <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
-    <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
-    <splitter expression="payload.getObservations()"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToReport"/>
-    <splitter/>
-    <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
-    <transformer expression="payload.toString()"/>
-  </chain>
-
-  <channel id="misReportStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
+  <!--TODO Временное решение для отладки, в боевом режиме цепляемся к jms -->
+  <file:inbound-channel-adapter id="lisRequestFileInput"
+                                directory="file:${input.request.directory}"
+                                channel="misPrescriptionFileChannel">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+  <channel id="misPrescriptionFileChannel"/>
+  <file:file-to-string-transformer input-channel="misPrescriptionFileChannel" output-channel="misPrescriptionStringChannel"
+                                   delete-files="true"/>
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
-  <channel id="misPrescriptionStringChannel">
+  <channel id="misPrescriptionStringChannel" datatype="java.lang.String">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
@@ -62,20 +46,22 @@
     <transformer expression="payload.toString()"/>
   </chain>
 
-  <channel id="observationStringChannel">
+  <publish-subscribe-channel id="observationStringChannel" datatype="java.lang.String">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
-  </channel>
+  </publish-subscribe-channel>
 
-  <!-- Конфигурация логгера -->
+  <file:outbound-channel-adapter
+      channel="observationStringChannel"
+      filename-generator="xmlReportFileGenerator"
+      directory="file:${output.request.directory}"/>
 
-  <channel id="loggerChannel" datatype="java.lang.String"/>
+  <!--TODO md5Transformer -->
 
-  <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
-
-  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
-  <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
-  <bridge input-channel="observationStringChannel" output-channel="nullChannel"/>
+  <file:outbound-channel-adapter
+      channel="observationStringChannel"
+      filename-generator="md5ReportFileGenerator"
+      directory="file:${output.request.directory}"/>
 
 </beans:beans>

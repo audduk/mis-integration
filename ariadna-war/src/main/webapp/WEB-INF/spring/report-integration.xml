@@ -16,15 +16,25 @@
              http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
-  <!-- ************ Используемые бины ************ -->
+
+  <!-- Зависимости конфигурации (используемые бины) -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:import resource="logger-integration.xml"/>
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов (filter - файл "старше 2 минут) -->
+  <file:inbound-channel-adapter id="lisReportFileInput"
+                                directory="file:${input.report.directory}"
+                                filter="ageFileFilter"
+                                channel="lisReportFileInputChannel">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
 
   <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
 
   <channel id="lisReportFileInputChannel"/>
 
   <file:file-to-string-transformer input-channel="lisReportFileInputChannel" output-channel="lisReportStringChannel"
-                                   delete-files="false"/>
+                                   delete-files="true"/>
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
     <interceptors>
@@ -47,35 +57,10 @@
     </interceptors>
   </channel>
 
-  <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
+  <!--<jms:outbound-channel-adapter id="jmsOut" destination="${mis.report.queue}"
+                                    channel="misReportChannel"/>-->
 
-  <channel id="misPrescriptionStringChannel">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
-
-  <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
-    <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToObservation"/>
-    <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
-    <transformer expression="payload.toString()"/>
-  </chain>
-
-  <channel id="observationStringChannel">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
-
-  <!-- Конфигурация логгера -->
-
-  <channel id="loggerChannel" datatype="java.lang.String"/>
-
-  <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
-
-  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
+  <!--TODO Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
-  <bridge input-channel="observationStringChannel" output-channel="nullChannel"/>
 
 </beans:beans>
