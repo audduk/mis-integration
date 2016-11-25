@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+  <bean id="jaxb-context" class="javax.xml.bind.JAXBContext">
+    <constructor-arg>
+      mis.integration.ariadna.data.ReportRoot
+      mis.integration.ariadna.data.RequestRoot
+      mis.integration.ariadna.data.Observation
+    </constructor-arg>
+  </bean>
+</beans>

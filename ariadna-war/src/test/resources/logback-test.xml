@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- Тестовый вывод логгера - только в консоль -->
+  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <Pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
+    </encoder>
+  </appender>
+  <!-- Блокируем незначительные сообщения, чтобы не захламлять лог сборки (можно изменять для отладки) -->
+  <root level="WARN">
+    <appender-ref ref="consoleAppender"/>
+  </root>
+</configuration>

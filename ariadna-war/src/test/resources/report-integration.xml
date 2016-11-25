@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+             xmlns:jms="http://www.springframework.org/schema/integration/jms"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/integration
+             http://www.springframework.org/schema/integration/spring-integration.xsd
+             http://www.springframework.org/schema/integration/xml
+             http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
+             http://www.springframework.org/schema/integration/jms
+             http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+             http://www.springframework.org/schema/integration/file
+             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов (filter - файл "старше 2 минут) -->
+  <file:inbound-channel-adapter id="lisReportFileInput"
+                                directory="file:${input.report.directory}"
+                                filter="ageFileFilter"
+                                channel="lisReportFileInputChannel">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+
+  <channel id="lisReportFileInputChannel"/>
+
+  <file:file-to-string-transformer input-channel="lisReportFileInputChannel" output-channel="lisReportStringChannel"
+                                   delete-files="false"/>
+
+  <channel id="lisReportStringChannel" datatype="java.lang.String">
+    <interceptors>
+      <wire-tap channel="loggerChannel"/>
+    </interceptors>
+  </channel>
+
+  <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
+    <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
+    <splitter expression="payload.getObservations()"/>
+    <transformer ref="ariadnaTransformerBean" method="transformToReport"/>
+    <splitter/>
+    <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
+    <transformer expression="payload.toString()"/>
+  </chain>
+
+  <channel id="misReportStringChannel" datatype="java.lang.String">
+    <interceptors>
+      <wire-tap channel="loggerChannel"/>
+    </interceptors>
+  </channel>
+
+  <channel id="loggerChannel" datatype="java.lang.String"/>
+
+  <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
+
+  <!--<jms:outbound-channel-adapter id="jmsOut" destination="${mis.report.queue}"
+                                    channel="misReportChannel"/>-->
+
+  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
+  <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
+
+  <!-- ************ Используемые бины ************ -->
+
+  <beans:bean id="ageFileFilter" class="org.springframework.integration.file.filters.LastModifiedFileListFilter">
+    <beans:property name="age" value="120"/>
+  </beans:bean>
+
+  <beans:bean id="ariadnaJaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+    <beans:property name="contextPath" value="mis.integration.ariadna.data"/>
+  </beans:bean>
+
+  <beans:bean id="ariadnaTransformerBean" class="mis.integration.ariadna.Transformer"/>
+
+  <beans:bean id="misReportMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+    <beans:property name="contextPath" value="mis.lis.report"/>
+  </beans:bean>
+
+</beans:beans>

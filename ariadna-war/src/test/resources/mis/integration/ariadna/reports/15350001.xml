@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<MedapLisObservationReport>
+  <Observation>
+    <ID>755618000</ID>
+    <IDs>999555</IDs>
+    <RegDate>2015-12-16T12:38:01</RegDate>
+    <Status>R</Status>
+    <FinishDate>2015-12-16T11:59:23</FinishDate>
+    <ReportDate>2015-12-16T12:02:04</ReportDate>
+    <OrderDate>2015-12-15</OrderDate>
+    <OrderID>12300023</OrderID>
+    <LisOrderID>75561700001</LisOrderID>
+    <HisOrderID>0000023000000074222000020100006505570005</HisOrderID>
+    <Cito>false</Cito>
+    <SpecimenTypeID>3</SpecimenTypeID>
+    <SpecimenType>Сыворотка</SpecimenType>
+    <SpecimenSiteID>1</SpecimenSiteID>
+    <SpecimenSite>Левый глаз</SpecimenSite>
+    <PurposeID>2</PurposeID>
+    <Purpose>Исследования на кишечную группу</Purpose>
+    <CollectDate>2015-12-16T12:58:40</CollectDate>
+    <ResultToOrderingInstitution>true</ResultToOrderingInstitution>
+    <CustomerType>1</CustomerType>
+    <InfoMessage>Проверка импорта инфомесседж</InfoMessage>
+    <Patient>
+      <ID>101556000</ID>
+      <RegCode>171076</RegCode>
+      <GivenName>test</GivenName>
+      <FamilyName>testgate5</FamilyName>
+      <MiddleName>ariadna</MiddleName>
+      <Phone>8-495-123-45-67</Phone>
+      <CellularPhone>7-916-838-38-38</CellularPhone>
+      <RelativePhone>8-495-123-55-77</RelativePhone>
+      <Gender>M</Gender>
+      <BirthDate>1978-01-04</BirthDate>
+      <Conditions>
+        <item>
+          <ConditionID>2</ConditionID>
+          <Condition>Нездоровый</Condition>
+        </item>
+      </Conditions>
+      <RegDate>2015-12-16</RegDate>
+      <Insurance>
+        <Company>
+        </Company>
+      </Insurance>
+    </Patient>
+    <OrderingInstitution>
+      <ID>53159000</ID>
+      <FullName>Медицинский блок Консультационный центр</FullName>
+      <Code>108</Code>
+      <Physician>
+      </Physician>
+    </OrderingInstitution>
+    <OrderInfo>
+      <item>
+        <ServiceID>23000</ServiceID>
+        <ServiceCode>В03.155.002</ServiceCode>
+        <Service>Определение аланинаминотрансферазы (АЛаТ) в сыворотке крови на анализаторе</Service>
+        <Completed>1</Completed>
+      </item>
+    </OrderInfo>
+    <ObservationReport>
+      <ReportGroup>
+        <ResTableDescription>Cobas 6000 - биохимия Cobas6000</ResTableDescription>
+        <ReportSeq>1</ReportSeq>
+        <FinishDate>2015-12-16T11:59:23</FinishDate>
+        <VerifierID>1</VerifierID>
+        <VerifierName>Сотрудник разработчика</VerifierName>
+        <Results>
+          <ObservationResult>
+            <SeqNo>1</SeqNo>
+            <MeasurementName>Биохимия</MeasurementName>
+            <HeaderMark>H</HeaderMark>
+            <RepLevel>0</RepLevel>
+            <ReportFormat>BLANK</ReportFormat>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>2</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Аланинаминотрансфераза</MeasurementName>
+            <MeasurementShortName>Аланинаминотрансфераза</MeasurementShortName>
+            <ResultText>12.00 Ед/л (0.00 - 41.00)</ResultText>
+            <ResultValue>12.00</ResultValue>
+            <Unit>Ед/л</Unit>
+            <NormMin>0</NormMin>
+            <NormMax>41</NormMax>
+            <NormText>(0.00 - 41.00)</NormText>
+            <OperatorID>1</OperatorID>
+            <OperatorName>Сотрудник разработчика</OperatorName>
+            <OperatorCode>100</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2015-12-16T11:59:00</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>1089382000</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>1123470000</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>23000</OrderedServiceID>
+            <OrderedWorkID>27324000</OrderedWorkID>
+          </ObservationResult>
+        </Results>
+      </ReportGroup>
+    </ObservationReport>
+  </Observation>
+</MedapLisObservationReport>
