@@ -13,33 +13,33 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
  */
 @Configuration
 public class IntegrationConfig {
-  @Bean("ariadnaJaxb2Marshaller")
+  @Bean(name = "ariadnaJaxb2Marshaller")
   public Jaxb2Marshaller ariadnaJaxb2Marshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
     marshaller.setContextPath("mis.integration.ariadna.data");
     return marshaller;
   }
 
-  @Bean("ariadnaTransformerBean")
+  @Bean(name = "ariadnaTransformerBean")
   public Transformer ariadnaTransformerBean() {
     return new Transformer();
   }
 
-  @Bean("misReportMarshaller")
+  @Bean(name = "misReportMarshaller")
   public Jaxb2Marshaller misReportMarshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
     marshaller.setClassesToBeBound(Report.class);
     return marshaller;
   }
 
-  @Bean("misPrescriptionMarshaller")
+  @Bean(name = "misPrescriptionMarshaller")
   public Jaxb2Marshaller misPrescriptionMarshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
     marshaller.setClassesToBeBound(PrescriptionDTO.class);
     return marshaller;
   }
 
-  @Bean("ageFileFilter")
+  @Bean(name = "ageFileFilter")
   public LastModifiedFileListFilter ageFileFilter() {
     LastModifiedFileListFilter result = new LastModifiedFileListFilter();
     result.setAge(120);
