@@ -40,6 +40,11 @@
   </channel>
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
+    <header-enricher>
+      <header name="output-file-name" method="computeValue">
+        <beans:bean class="mis.integration.ariadna.FileCodeGenerator"/>
+      </header>
+    </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
     <transformer ref="ariadnaTransformerBean" method="transformToObservation"/>
     <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
@@ -57,10 +62,13 @@
       filename-generator="xmlReportFileGenerator"
       directory="file:${output.request.directory}"/>
 
-  <!--TODO md5Transformer -->
+  <transformer input-channel="observationStringChannel" output-channel="observationMd5Channel"
+               ref="md5Transformer" method="transform"/>
+
+  <channel id="observationMd5Channel" datatype="java.lang.String"/>
 
   <file:outbound-channel-adapter
-      channel="observationStringChannel"
+      channel="observationMd5Channel"
       filename-generator="md5ReportFileGenerator"
       directory="file:${output.request.directory}"/>
 

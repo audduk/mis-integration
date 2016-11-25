@@ -1,5 +1,6 @@
 package mis.integration.ariadna.config;
 
+import mis.integration.ariadna.Md5Transformer;
 import mis.integration.ariadna.RequestFileNameGenerator;
 import mis.integration.ariadna.Transformer;
 import mis.lis.prescription.PrescriptionDTO;
@@ -46,6 +47,11 @@ public class IntegrationConfig {
     LastModifiedFileListFilter result = new LastModifiedFileListFilter();
     result.setAge(120);
     return result;
+  }
+
+  @Bean(name = "md5Transformer")
+  public Md5Transformer md5Transformer() {
+    return new Md5Transformer();
   }
 
   @Bean(name = "xmlReportFileGenerator")
