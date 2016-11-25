@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <Pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
+    </encoder>
+  </appender>
+
+  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+    <file>${catalina.home}/logs/ariadna.log</file>
+    <encoder>
+      <Pattern>%date %level %logger{10} [%file:%line] %msg%n</Pattern>
+    </encoder>
+  </appender>
+
+  <appender name="sqlAppender" class="ch.qos.logback.core.FileAppender">
+    <file>${catalina.home}/logs/ariadna_sql.log</file>
+    <encoder>
+      <Pattern>%date %level %logger{10} [%file:%line] %msg%n</Pattern>
+    </encoder>
+  </appender>
+
+  <!-- Hibernate loggers by http://docs.jboss.org/hibernate/orm/4.3/topical/html/logging/Logging.html -->
+  <logger name="org.hibernate" level="WARN" additivity="false">
+    <appender-ref ref="sqlAppender"/>
+    <appender-ref ref="consoleAppender"/>
+  </logger>
+  <logger name="java.sql" level="WARN">
+    <appender-ref ref="sqlAppender"/>
+    <appender-ref ref="consoleAppender"/>
+  </logger>
+
+  <!-- Root -->
+  <root level="INFO">
+    <appender-ref ref="consoleAppender"/>
+    <appender-ref ref="fileAppender"/>
+  </root>
+
+</configuration>

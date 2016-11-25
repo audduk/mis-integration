@@ -2,10 +2,7 @@ package mis.integration.ariadna.data;
 
 import mis.integration.ariadna.data.adapters.DateAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
  * ДТО. Заказ на проведение ЛИ
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Observation")
 public class Observation {
   /** ID	* Идентификатор документа	NUMBER(12)	12 знаков */
   @XmlElement(name = "ID")

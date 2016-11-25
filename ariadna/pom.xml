@@ -19,6 +19,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>mis-server</groupId>
+      <artifactId>mis-lis-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <scope>test</scope>
