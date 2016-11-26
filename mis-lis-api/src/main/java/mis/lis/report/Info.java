@@ -8,9 +8,6 @@
 
 package mis.lis.report;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.xml.bind.annotation.*;
 
 
@@ -63,8 +60,6 @@ public class Info {
     @XmlSchemaType(name = "anySimpleType")
     protected String date;
     @XmlAttribute(name = "login")
-    @Getter
-    @Setter
     private String login;
 
     /**
@@ -211,5 +206,12 @@ public class Info {
         this.date = value;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 }
 
