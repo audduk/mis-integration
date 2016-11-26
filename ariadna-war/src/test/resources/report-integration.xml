@@ -49,6 +49,11 @@
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
+  <!-- Тестовый блок -->
+  <channel id="prescriptionFileInputChannel"/>
+  <file:file-to-string-transformer input-channel="prescriptionFileInputChannel" output-channel="misPrescriptionStringChannel"
+                                   delete-files="false"/>
+
   <channel id="misPrescriptionStringChannel">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
@@ -57,7 +62,7 @@
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToObservation"/>
+    <transformer ref="ariadnaTransformerBean" method="transformToRequestRoot"/>
     <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
   </chain>

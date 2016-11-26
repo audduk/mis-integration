@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<prescriptionDTO>
+  <status>SENT</status>
+  <name>Направление на лабораторное исследование</name>
+  <patient>
+    <id>764</id>
+    <lastName>Агапова</lastName>
+    <firstName>Наталья</firstName>
+    <middleName>Михайловна</middleName>
+    <code>1/16</code>
+    <birthDate>1978-08-11T00:00:00+03:00</birthDate>
+    <socialStatus>
+      <id>235</id>
+      <name>член семьи военнослужащего</name>
+      <code>7</code>
+    </socialStatus>
+  </patient>
+  <doctor>
+    <id>70</id>
+    <lastName>Боваева</lastName>
+    <firstName>Светлана</firstName>
+    <middleName>Чимидовна</middleName>
+    <appointment>
+      <id>31</id>
+      <name>Врач-кардиолог</name>
+      <code>308000_02813</code>
+    </appointment>
+  </doctor>
+  <department>
+    <id>19</id>
+    <name>Терапевтическое отделение</name>
+    <code>02813</code>
+  </department>
+  <reanimation>false</reanimation>
+  <date>2016-07-05T09:46:00+03:00</date>
+  <healthRecordId>183</healthRecordId>
+  <prescription xsi:type="histologyLabPrescriptionDTO" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <id>162</id>
+    <urgency>
+      <id>0</id>
+      <name>Не срочно</name>
+      <code>NORMAL</code>
+    </urgency>
+    <referralDate>2016-07-05T15:15:38.604+03:00</referralDate>
+    <diagnosis>
+      <id>19468</id>
+      <name>Последствия неуточненной травмы шеи и туловища</name>
+      <code>T91.9</code>
+    </diagnosis>
+    <biomaterials>
+      <id>768</id>
+      <name>Моча</name>
+      <code>2</code>
+    </biomaterials>
+    <manipulations xsi:type="simpleMedicalServiceDTO">
+      <id>63717</id>
+      <name>Исследование уровня креатинина в моче (проба Реберга)</name>
+      <code>A09.28.006</code>
+      <shortName>Исследование уровня креатинина в моче</shortName>
+      <isNotPayedByTfoms>false</isNotPayedByTfoms>
+    </manipulations>
+    <additionalParameters></additionalParameters>
+  </prescription>
+  <payment>
+    <id>764</id>
+  </payment>
+  <payed>true</payed>
+</prescriptionDTO>
