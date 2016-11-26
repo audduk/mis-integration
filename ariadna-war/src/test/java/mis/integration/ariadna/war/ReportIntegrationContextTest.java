@@ -1,6 +1,7 @@
 package mis.integration.ariadna.war;
 
 import mis.lis.prescription.LabPrescriptionDTO;
+import mis.lis.prescription.PatientDTO;
 import mis.lis.prescription.PrescriptionDTO;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +34,8 @@ public class ReportIntegrationContextTest extends AbstractAriadnaTest {
   private DirectChannel lisReportFileInputChannel;
 
   @Autowired
-  @Qualifier("misPrescriptionStringChannel")
-  private DirectChannel misPrescriptionStringChannel;
+  @Qualifier("prescriptionFileInputChannel")
+  private DirectChannel prescriptionFileInputChannel;
 
   private Marshaller marshaller;
 
@@ -53,18 +54,8 @@ public class ReportIntegrationContextTest extends AbstractAriadnaTest {
 
   @Test
   public void testMisPrescriptionTransformationAlgo() throws JAXBException {
-    PrescriptionDTO dto = getPrescriptionDTO();
-    StringWriter writer = new StringWriter();
-    marshaller.marshal(dto, writer);
-    Message<String> message = MessageBuilder.withPayload(writer.toString()).build();
-    misPrescriptionStringChannel.send(message);
-  }
-
-  private static PrescriptionDTO getPrescriptionDTO() {
-    PrescriptionDTO dto = new PrescriptionDTO();
-    dto.setDate(Calendar.getInstance());
-    dto.setPrescription(new LabPrescriptionDTO());
-    dto.getPrescription().setId(123L);
-    return dto;
+    File file = getResourceFile("requests/request.xml");
+    Message<File> message = MessageBuilder.withPayload(file).build();
+    prescriptionFileInputChannel.send(message);
   }
 }

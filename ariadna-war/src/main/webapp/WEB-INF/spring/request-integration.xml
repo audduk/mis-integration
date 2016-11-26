@@ -46,7 +46,7 @@
       </header>
     </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToObservation"/>
+    <transformer ref="ariadnaTransformerBean" method="transformToRequestRoot"/>
     <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
   </chain>
