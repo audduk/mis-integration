@@ -1,7 +1,5 @@
 package mis.dto;
 
-import lombok.Getter;
-import lombok.Setter;
 import mis.dto.common.AbstractEntityDto;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,8 +9,6 @@ import java.io.Serializable;
  * Personal Data Transfer Object
  */
 @XmlRootElement
-@Getter
-@Setter
 public class PersonalDataDto extends AbstractEntityDto implements Serializable {
   /**
    * Last Name
@@ -40,5 +36,37 @@ public class PersonalDataDto extends AbstractEntityDto implements Serializable {
     this.firstName = firstName;
     this.lastName = lastName;
     this.middleName = middleName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getMiddleName() {
+    return middleName;
+  }
+
+  public void setMiddleName(String middleName) {
+    this.middleName = middleName;
+  }
+
+  public Boolean getSexInfo() {
+    return sexInfo;
+  }
+
+  public void setSexInfo(Boolean sexInfo) {
+    this.sexInfo = sexInfo;
   }
 }

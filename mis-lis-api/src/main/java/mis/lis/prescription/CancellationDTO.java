@@ -1,7 +1,5 @@
 package mis.lis.prescription;
 
-import lombok.Getter;
-import lombok.Setter;
 import mis.dto.common.AbstractEntityDto;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,8 +16,6 @@ import java.util.Calendar;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@Getter
-@Setter
 public class CancellationDTO extends AbstractEntityDto {
 
   /**
@@ -44,4 +40,36 @@ public class CancellationDTO extends AbstractEntityDto {
    */
   @XmlElement
   Calendar date;
+
+  public Long getRequestID() {
+    return requestID;
+  }
+
+  public void setRequestID(Long requestID) {
+    this.requestID = requestID;
+  }
+
+  public EmployeeDTO getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(EmployeeDTO employee) {
+    this.employee = employee;
+  }
+
+  public String getBasis() {
+    return basis;
+  }
+
+  public void setBasis(String basis) {
+    this.basis = basis;
+  }
+
+  public Calendar getDate() {
+    return date;
+  }
+
+  public void setDate(Calendar date) {
+    this.date = date;
+  }
 }

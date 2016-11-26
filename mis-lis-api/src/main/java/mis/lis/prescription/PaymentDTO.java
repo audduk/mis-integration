@@ -17,8 +17,8 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({ContractDTO.class, OmsPolicyDTO.class, DmsPolicyDTO.class, VmpCouponDTO.class})
-public abstract class PaymentDTO extends AbstractEntityDto implements Serializable {
-  protected PaymentDTO() {
+public class PaymentDTO extends AbstractEntityDto implements Serializable {
+  public PaymentDTO() {
   }
 
   protected PaymentDTO(Long id) {

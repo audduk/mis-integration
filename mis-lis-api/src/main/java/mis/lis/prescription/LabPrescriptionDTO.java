@@ -1,10 +1,5 @@
 package mis.lis.prescription;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,10 +14,6 @@ import java.util.Set;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class LabPrescriptionDTO extends BasePrescriptionDTO implements Serializable {
   /**
    * Биоматериал
@@ -67,5 +58,87 @@ public class LabPrescriptionDTO extends BasePrescriptionDTO implements Serializa
    * Доп.параметры назначения
    */
   private String additionalParameters;
+
+  public Set<BiomaterialDTO> getBiomaterials() {
+    return biomaterials;
+  }
+
+  public void setBiomaterials(Set<BiomaterialDTO> biomaterials) {
+    this.biomaterials = biomaterials;
+  }
+
+  public BiomaterialTakingPlaceDTO getBiomaterialTakingPlace() {
+    return biomaterialTakingPlace;
+  }
+
+  public void setBiomaterialTakingPlace(BiomaterialTakingPlaceDTO biomaterialTakingPlace) {
+    this.biomaterialTakingPlace = biomaterialTakingPlace;
+  }
+
+  public String getBiomaterialDescription() {
+    return biomaterialDescription;
+  }
+
+  public void setBiomaterialDescription(String biomaterialDescription) {
+    this.biomaterialDescription = biomaterialDescription;
+  }
+
+  public String getBiomaterialMarking() {
+    return biomaterialMarking;
+  }
+
+  public void setBiomaterialMarking(String biomaterialMarking) {
+    this.biomaterialMarking = biomaterialMarking;
+  }
+
+  public String getBiomaterialCount() {
+    return biomaterialCount;
+  }
+
+  public void setBiomaterialCount(String biomaterialCount) {
+    this.biomaterialCount = biomaterialCount;
+  }
+
+  @Override
+  public String getExtraInformation() {
+    return extraInformation;
+  }
+
+  @Override
+  public void setExtraInformation(String extraInformation) {
+    this.extraInformation = extraInformation;
+  }
+
+  public ResearchTargetDTO getResearchTarget() {
+    return researchTarget;
+  }
+
+  public void setResearchTarget(ResearchTargetDTO researchTarget) {
+    this.researchTarget = researchTarget;
+  }
+
+  public SimpleMedicalServiceDTO getServiceTakingName() {
+    return serviceTakingName;
+  }
+
+  public void setServiceTakingName(SimpleMedicalServiceDTO serviceTakingName) {
+    this.serviceTakingName = serviceTakingName;
+  }
+
+  public Set<ManipulationDTO> getManipulations() {
+    return manipulations;
+  }
+
+  public void setManipulations(Set<ManipulationDTO> manipulations) {
+    this.manipulations = manipulations;
+  }
+
+  public String getAdditionalParameters() {
+    return additionalParameters;
+  }
+
+  public void setAdditionalParameters(String additionalParameters) {
+    this.additionalParameters = additionalParameters;
+  }
 }
 
