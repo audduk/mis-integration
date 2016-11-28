@@ -67,7 +67,16 @@
     <transformer expression="payload.toString()"/>
   </chain>
 
-  <channel id="observationStringChannel">
+  <publish-subscribe-channel id="observationStringChannel" datatype="java.lang.String">
+    <interceptors>
+      <wire-tap channel="loggerChannel"/>
+    </interceptors>
+  </publish-subscribe-channel>
+
+  <transformer input-channel="observationStringChannel" output-channel="observationMd5Channel"
+               ref="md5Transformer" method="transform"/>
+
+  <channel id="observationMd5Channel" datatype="java.lang.String">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
@@ -81,6 +90,6 @@
 
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
-  <bridge input-channel="observationStringChannel" output-channel="nullChannel"/>
+  <bridge input-channel="observationMd5Channel" output-channel="nullChannel"/>
 
 </beans:beans>
