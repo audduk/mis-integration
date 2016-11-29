@@ -3,25 +3,30 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
-             xmlns:jms="http://www.springframework.org/schema/integration/jms"
+             xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
              xmlns:file="http://www.springframework.org/schema/integration/file"
+             xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="
              http://www.springframework.org/schema/beans
              http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+             http://www.springframework.org/schema/context/spring-context.xsd
              http://www.springframework.org/schema/integration
              http://www.springframework.org/schema/integration/spring-integration.xsd
              http://www.springframework.org/schema/integration/xml
              http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
-             http://www.springframework.org/schema/integration/jms
-             http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+             http://www.springframework.org/schema/integration/amqp
+             http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
   <!-- Зависимости конфигурации (используемые бины) -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:bean class="mis.integration.ariadna.config.RabbitConfig"/>
   <beans:import resource="logger-integration.xml"/>
+  <context:property-placeholder location="classpath:application.properties"/>
 
-  <!--TODO Временное решение для отладки, в боевом режиме цепляемся к jms -->
+  <!--TODO Временное решение для отладки, в боевом режиме оставляем только amqp -->
   <file:inbound-channel-adapter id="lisRequestFileInput"
                                 directory="file:${input.request.directory}"
                                 channel="misPrescriptionFileChannel">
@@ -30,6 +35,11 @@
   <channel id="misPrescriptionFileChannel"/>
   <file:file-to-string-transformer input-channel="misPrescriptionFileChannel" output-channel="misPrescriptionStringChannel"
                                    delete-files="true"/>
+
+  <!-- Считываем "Заявку на ЛИ" из очереди (исходящей) МИСа -->
+  <!--<int-amqp:inbound-channel-adapter channel="misPrescriptionStringChannel"
+                                    connection-factory="connectionFactory"
+                                    queue-names="${input.request.queue:prescription.create}"/>-->
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
@@ -56,6 +66,8 @@
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </publish-subscribe-channel>
+
+  <!-- Записываем результат преобразования в исходящие файлы (в соответствии с протоколом) -->
 
   <file:outbound-channel-adapter
       channel="observationStringChannel"
