@@ -3,6 +3,7 @@ package mis.integration.ariadna.config;
 import mis.integration.ariadna.Md5Transformer;
 import mis.integration.ariadna.RequestFileNameGenerator;
 import mis.integration.ariadna.Transformer;
+import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
 import mis.lis.report.Report;
 import org.springframework.context.annotation.Bean;
@@ -62,5 +63,10 @@ public class IntegrationConfig {
   @Bean(name = "md5ReportFileGenerator")
   FileNameGenerator md5ReportFileGenerator() {
     return  new RequestFileNameGenerator("md5");
+  }
+
+  @Bean(name = "zipTransformer")
+  public ZipTransformer zipTransformer() {
+    return new ZipTransformer();
   }
 }

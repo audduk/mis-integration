@@ -63,10 +63,21 @@
   </channel>
 
   <!--TODO Добавить преобразование в формат МИСа -->
+  <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
+    <transformer ref="zipTransformer"/>
+  </chain>
+
+  <publish-subscribe-channel id="misReportZipChannel"/>
+
+  <!--TODO Тестовая конфигурация (сохранение в файл) -->
+  <file:outbound-channel-adapter channel="misReportZipChannel"
+                                 directory="${spy.report.into.mis}"/>
 
   <!-- Записываем результат в очередь (входящуя) протоколов МИСа -->
-  <int-amqp:outbound-channel-adapter channel="misReportStringChannel"
+  <!--
+  <int-amqp:outbound-channel-adapter channel="misReportZipChannel"
                                      amqp-template="rabbitTemplate"
                                      exchange-name="${output.report.queue:prescription.complete}"/>
+  -->
 
 </beans:beans>
