@@ -4,25 +4,13 @@ import mis.dto.common.DirectoryItemDTO;
 import mis.integration.ariadna.data.*;
 import mis.integration.ariadna.exceptions.PrescriptionDataException;
 import mis.lis.prescription.*;
-import mis.lis.report.Report;
 
 import java.util.*;
 
 /**
- * Преобразование {@link Observation} в структуру протокола ЛИ МИС ({@link Report})
+ * Преобразование назначения ({@link PrescriptionDTO} в структуру заказа ЛИ ЛИС ({@link RequestRoot})
  */
-public class Transformer {
-  public List<Report> transformToReport(Observation observation) {
-    final List<Report> result = new ArrayList<>();
-    if (observation.getReportGroups() == null)
-      return result;
-    for (ReportGroup group : observation.getReportGroups()) {
-      result.add(new Report());
-      result.add(new Report());
-    }
-    return result;
-  }
-
+public class PrescriptionTransformer {
   public RequestRoot transformToRequestRoot(PrescriptionDTO prescription) throws PrescriptionDataException {
     try {
       final Observation observation = getObservation(prescription);

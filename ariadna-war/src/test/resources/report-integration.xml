@@ -35,7 +35,7 @@
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToReport"/>
+    <transformer ref="reportTransformer" method="transformToReport"/>
     <splitter/>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
@@ -62,7 +62,7 @@
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
-    <transformer ref="ariadnaTransformerBean" method="transformToRequestRoot"/>
+    <transformer ref="prescriptionTransformer" method="transformToRequestRoot"/>
     <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
   </chain>

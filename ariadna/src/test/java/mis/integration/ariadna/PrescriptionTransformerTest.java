@@ -1,6 +1,5 @@
 package mis.integration.ariadna;
 
-import mis.integration.ariadna.data.Observation;
 import mis.integration.ariadna.data.RequestRoot;
 import mis.integration.ariadna.exceptions.PrescriptionDataException;
 import mis.lis.prescription.LabPrescriptionDTO;
@@ -14,12 +13,12 @@ import java.util.Calendar;
 /**
  * Тестирование трансформера
  */
-public class TransformerTest {
+public class PrescriptionTransformerTest {
   @Test
   @Ignore
   public void testTransformation() throws PrescriptionDataException {
     final PrescriptionDTO dto = getPrescriptionDTO();
-    final RequestRoot result = new Transformer().transformToRequestRoot(dto);
+    final RequestRoot result = new PrescriptionTransformer().transformToRequestRoot(dto);
   }
 
   private PrescriptionDTO getPrescriptionDTO() {

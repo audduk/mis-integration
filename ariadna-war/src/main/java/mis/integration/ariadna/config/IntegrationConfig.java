@@ -1,8 +1,9 @@
 package mis.integration.ariadna.config;
 
 import mis.integration.ariadna.Md5Transformer;
+import mis.integration.ariadna.ReportTransformer;
 import mis.integration.ariadna.RequestFileNameGenerator;
-import mis.integration.ariadna.Transformer;
+import mis.integration.ariadna.PrescriptionTransformer;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
 import mis.lis.report.Report;
@@ -24,9 +25,14 @@ public class IntegrationConfig {
     return marshaller;
   }
 
-  @Bean(name = "ariadnaTransformerBean")
-  public Transformer ariadnaTransformerBean() {
-    return new Transformer();
+  @Bean(name = "prescriptionTransformer")
+  public PrescriptionTransformer prescriptionTransformer() {
+    return new PrescriptionTransformer();
+  }
+
+  @Bean(name = "reportTransformer")
+  public ReportTransformer reportTransformer() {
+    return new ReportTransformer();
   }
 
   @Bean(name = "misReportMarshaller")
