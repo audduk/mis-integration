@@ -56,6 +56,8 @@ public class ZipTransformer extends AbstractZipTransformer {
 
   private static final String ZIP_EXTENSION = ".zip";
 
+  private static final String ZIP_HEADER_NAME = "zip_name";
+
   private volatile int compressionLevel = Deflater.DEFAULT_COMPRESSION;
 
   public ZipTransformer() {
@@ -94,8 +96,12 @@ public class ZipTransformer extends AbstractZipTransformer {
       final Object zippedData;
       final String baseFileName = this.fileNameGenerator.generateFileName(message);
 
-      final String zipFileName = baseFileName + ZIP_EXTENSION;
-
+      final String zipFileName;
+      if (message.getHeaders().containsKey(ZIP_HEADER_NAME)) {
+        zipFileName = (String) message.getHeaders().get(ZIP_HEADER_NAME);
+      } else {
+        zipFileName = baseFileName + ZIP_EXTENSION;
+      }
       final Date lastModifiedDate;
 
       if (message.getHeaders().containsKey(ZipHeaders.ZIP_ENTRY_LAST_MODIFIED_DATE)) {

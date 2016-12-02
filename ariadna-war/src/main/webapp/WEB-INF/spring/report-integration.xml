@@ -52,6 +52,10 @@
     <splitter expression="payload.getObservations()"/>
     <transformer ref="ariadnaTransformerBean" method="transformToReport"/>
     <splitter/>
+    <!-- Задаем имя "шпионского" zip-файла с протоколом, передаваемым в МИС -->
+    <header-enricher>
+      <header name="zip_name" expression="headers.get('file_name') + '-' + payload.order.externalID + '.zip'"/>
+    </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
   </chain>
