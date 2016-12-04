@@ -56,6 +56,9 @@ public class ObservationResult {
   /** ResultValue		Значение измерения	String(1024) */
   @XmlElement(name = "ResultValue")
   private String resultValue;
+  /** Unit		Единицы измерения	String(512) */
+  @XmlElement(name = "Unit")
+  private String unit;
   /** NormMin		Минимальное значение референтного интервала	NUMBER(15) */
   @XmlElement(name = "NormMin")
   private String normMin;
@@ -179,6 +182,14 @@ public class ObservationResult {
 
   public void setResultValue(String resultValue) {
     this.resultValue = resultValue;
+  }
+
+  public String getUnit() {
+    return unit;
+  }
+
+  public void setUnit(String unit) {
+    this.unit = unit;
   }
 
   public String getNormMin() {
