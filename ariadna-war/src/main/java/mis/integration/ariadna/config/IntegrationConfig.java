@@ -10,8 +10,14 @@ import mis.lis.report.Report;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.file.FileNameGenerator;
+import org.springframework.integration.file.filters.CompositeFileListFilter;
+import org.springframework.integration.file.filters.FileListFilter;
 import org.springframework.integration.file.filters.LastModifiedFileListFilter;
+import org.springframework.integration.file.filters.RegexPatternFileListFilter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
+import java.io.File;
+import java.util.regex.Pattern;
 
 /**
  * Конфигурация интеграционного профиля
@@ -49,10 +55,22 @@ public class IntegrationConfig {
     return marshaller;
   }
 
-  @Bean(name = "ageFileFilter")
-  public LastModifiedFileListFilter ageFileFilter() {
-    LastModifiedFileListFilter result = new LastModifiedFileListFilter();
-    result.setAge(120);
+  @Bean(name = "xmlFileFilter")
+  public FileListFilter xmlFileFilter() {
+    return getFileListFilter("xml");
+  }
+
+  @Bean(name = "md5FileFilter")
+  public FileListFilter md5FileFilter() {
+    return getFileListFilter("md5");
+  }
+
+  private FileListFilter getFileListFilter(String ext) {
+    CompositeFileListFilter<File> result = new CompositeFileListFilter<>();
+    LastModifiedFileListFilter ageFilter = new LastModifiedFileListFilter();
+    ageFilter.setAge(120);
+    result.addFilter(ageFilter);
+    result.addFilter(new RegexPatternFileListFilter(Pattern.compile(".*\\." + ext, Pattern.CASE_INSENSITIVE)));
     return result;
   }
 
