@@ -4,6 +4,7 @@ import mis.integration.ariadna.Md5Transformer;
 import mis.integration.ariadna.ReportTransformer;
 import mis.integration.ariadna.RequestFileNameGenerator;
 import mis.integration.ariadna.PrescriptionTransformer;
+import mis.integration.ariadna.file.PdfSplitter;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
 import mis.lis.report.Report;
@@ -92,5 +93,10 @@ public class IntegrationConfig {
   @Bean(name = "zipTransformer")
   public ZipTransformer zipTransformer() {
     return new ZipTransformer();
+  }
+
+  @Bean(name = "pdfSplitter")
+  public PdfSplitter pdfSplitter() {
+    return new PdfSplitter();
   }
 }

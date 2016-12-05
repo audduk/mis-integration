@@ -55,10 +55,16 @@
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
+    <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
+    <header-enricher>
+      <header name="observation" expression="payload"/>
+    </header-enricher>
     <transformer ref="reportTransformer" method="transformToReport"/>
     <splitter/>
-    <!-- Задаем имя "шпионского" zip-файла с протоколом, передаваемым в МИС -->
     <header-enricher>
+      <!--Запоминаем полученный объект report (будет использоваться при построении pdf) -->
+      <header name="report" expression="payload"/>
+      <!-- Задаем имя "шпионского" zip-файла с протоколом, передаваемым в МИС -->
       <header name="zip_name" expression="headers.get('file_name') + '-' + payload.order.externalID + '.zip'"/>
     </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
@@ -71,8 +77,8 @@
     </interceptors>
   </channel>
 
-  <!--TODO Добавить преобразование в формат МИСа -->
   <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
+    <transformer ref="pdfSplitter"/>
     <transformer ref="zipTransformer"/>
   </chain>
 
