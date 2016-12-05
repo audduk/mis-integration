@@ -26,19 +26,24 @@
   <beans:import resource="logger-integration.xml"/>
   <context:property-placeholder location="classpath:application.properties"/>
 
-  <!-- Вычитываем xml-файлы из каталога входящих отчетов (filter - файл "старше 2 минут) -->
-  <file:inbound-channel-adapter id="lisReportFileInput"
-                                directory="file:${input.report.directory}"
-                                filter="ageFileFilter"
-                                channel="lisReportFileInputChannel">
+  <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
+  <file:inbound-channel-adapter id="md5ReportInput" directory="file:${input.report.directory}"
+                                filter="md5FileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+
+  <file:file-to-string-transformer input-channel="md5ReportInput" output-channel="nullChannel"
+                                   delete-files="true"/>
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
+  <file:inbound-channel-adapter id="lisReportInput" directory="file:${input.report.directory}"
+                                filter="xmlFileFilter">
     <poller fixed-delay="50"/>
   </file:inbound-channel-adapter>
 
   <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
 
-  <channel id="lisReportFileInputChannel"/>
-
-  <file:file-to-string-transformer input-channel="lisReportFileInputChannel" output-channel="lisReportStringChannel"
+  <file:file-to-string-transformer input-channel="lisReportInput" output-channel="lisReportStringChannel"
                                    delete-files="true"/>
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
