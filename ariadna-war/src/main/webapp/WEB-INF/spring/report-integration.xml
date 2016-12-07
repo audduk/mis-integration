@@ -44,6 +44,7 @@
   <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
 
   <file:file-to-string-transformer input-channel="lisReportInput" output-channel="lisReportStringChannel"
+                                   charset="UTF-8"
                                    delete-files="true"/>
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
