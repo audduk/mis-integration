@@ -43,11 +43,21 @@
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
-  <channel id="misPrescriptionStringChannel" datatype="java.lang.String">
+  <publish-subscribe-channel id="misPrescriptionStringChannel" datatype="java.lang.String">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
-  </channel>
+  </publish-subscribe-channel>
+
+  <!-- Шпионская конфигурация (сохранение в шпионский файл) -->
+  <int-xml:xpath-header-enricher input-channel="misPrescriptionStringChannel" output-channel="spyStringChannel">
+    <int-xml:header name="file_name" xpath-expression="/prescriptionDTO/prescription/id"/>
+  </int-xml:xpath-header-enricher>
+  <channel id="spyStringChannel"/>
+  <file:outbound-channel-adapter channel="spyStringChannel"
+                                 filename-generator-expression="headers.get('file_name')+'.xml'"
+                                 directory="${spy.request.from.mis}"/>
+  <!-- завершение шпионской конфигурации -->
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <header-enricher>
