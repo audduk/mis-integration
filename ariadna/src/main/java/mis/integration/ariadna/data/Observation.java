@@ -44,6 +44,8 @@ public class Observation {
   @XmlJavaTypeAdapter(DateAdapter.class)
   @XmlElement(name = "OrderDate")
   private Calendar orderDate;
+  @XmlElement(name = "Diagnosis")
+  private String diagnosis;
   /** SpecimenTypeID	*	Типа материала, ID по справочнику	NUMBER(12) */
   @XmlElement(name = "SpecimenTypeID")
   private Long specimenTypeID;
@@ -157,6 +159,14 @@ public class Observation {
 
   public void setOrderDate(Calendar orderDate) {
     this.orderDate = orderDate;
+  }
+
+  public String getDiagnosis() {
+    return diagnosis;
+  }
+
+  public void setDiagnosis(String diagnosis) {
+    this.diagnosis = diagnosis;
   }
 
   public Long getSpecimenTypeID() {

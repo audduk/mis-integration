@@ -32,6 +32,9 @@ public class PrescriptionTransformer {
     observation.setMisOrderID(prescription.getId().toString());
     observation.setOrderID(prescription.getId().toString());
     //observation.setOrderDate();//не заполняем (по согласованию с Ариадна)
+    final DirectoryItemDTO diagnosis = prescription.getDiagnosis();
+    if (diagnosis != null)
+      observation.setDiagnosis(diagnosis.getCode());
     final Set<BiomaterialDTO> biomaterials = prescription.getBiomaterials();
     if (biomaterials == null || biomaterials.isEmpty())
       throw new PrescriptionDataException("Не задан биометериал");
@@ -71,7 +74,7 @@ public class PrescriptionTransformer {
     patient.setGender(getGender(patientDTO.getSex()));
     patient.setBirthDate(patientDTO.getBirthDate());
     patient.setRegDate(null);
-    fillPatientCondition(dto);
+    fillPatientCondition(patient, dto);
     return patient;
   }
 
@@ -97,8 +100,12 @@ public class PrescriptionTransformer {
   }
 
   //TODO !!!
-  private void fillPatientCondition(PrescriptionDTO dto) {
-
+  private void fillPatientCondition(Patient patient, PrescriptionDTO dto) {
+    final DirectoryItemDTO itemDTO = dto.getPatient().getSocialStatus();
+    if (itemDTO == null)
+      return;
+    patient.setConditionID(itemDTO.getCode());
+    patient.setCondition(itemDTO.getName());
   }
 
   private String getGender(DirectoryItemDTO sex) {
