@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+             xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+             http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.springframework.org/schema/integration
+             http://www.springframework.org/schema/integration/spring-integration.xsd
+             http://www.springframework.org/schema/integration/xml
+             http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
+             http://www.springframework.org/schema/integration/amqp
+             http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+             http://www.springframework.org/schema/integration/file
+             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+
+  <!-- Зависимости конфигурации (используемые бины) -->
+  <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:import resource="logger-integration.xml"/>
+  <context:property-placeholder location="classpath:application.properties"/>
+
+  <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
+  <file:inbound-channel-adapter id="md5VocInput" directory="file:${input.voc.directory}"
+                                filter="md5FileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+  <file:file-to-string-transformer input-channel="md5VocInput" output-channel="nullChannel"
+                                   delete-files="true"/>
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
+  <file:inbound-channel-adapter id="lisVocInput" directory="file:${input.voc.directory}"
+                                filter="xmlFileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+
+  <!-- Преобразование файла "Словарь", поступившего из ЛИС -->
+
+  <file:file-to-string-transformer input-channel="lisVocInput" output-channel="lisVocStringChannel"
+                                   charset="UTF-8"
+                                   delete-files="true"/>
+
+  <channel id="lisVocStringChannel" datatype="java.lang.String"/>
+
+  <chain input-channel="lisVocStringChannel" output-channel="misVocStringChannel">
+    <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
+    <header-enricher>
+      <header name="domain" expression="payload.domain"/>
+    </header-enricher>
+    <splitter expression="payload.contents"/>
+  </chain>
+
+  <channel id="misVocStringChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseItem"/>
+
+  <!--TODO Тестовая конфигурация (сохранение в файл) -->
+  <bridge input-channel="misVocStringChannel" output-channel="nullChannel"/>
+
+  <!-- Выполняем корректировку данных в базе -->
+  <!--TODO Разрбраться как быть с jdbc в данном случае -->
+
+</beans:beans>

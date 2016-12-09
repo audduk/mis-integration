@@ -10,6 +10,7 @@ import org.springframework.context.annotation.*;
 @PropertySource("classpath:application.properties")
 @ImportResource(locations = {
     "/WEB-INF/spring/report-integration.xml",
-    "/WEB-INF/spring/request-integration.xml"})
+    "/WEB-INF/spring/request-integration.xml",
+    "/WEB-INF/spring/voc-integration.xml"})
 public class AppWebConfig {
 }

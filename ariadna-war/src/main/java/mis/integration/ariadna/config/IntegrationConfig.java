@@ -4,6 +4,9 @@ import mis.integration.ariadna.Md5Transformer;
 import mis.integration.ariadna.ReportTransformer;
 import mis.integration.ariadna.RequestFileNameGenerator;
 import mis.integration.ariadna.PrescriptionTransformer;
+import mis.integration.ariadna.data.ReportRoot;
+import mis.integration.ariadna.data.RequestRoot;
+import mis.integration.ariadna.data.vocabulary.BaseVocabulary;
 import mis.integration.ariadna.file.PdfSplitter;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
@@ -28,7 +31,7 @@ public class IntegrationConfig {
   @Bean(name = "ariadnaJaxb2Marshaller")
   public Jaxb2Marshaller ariadnaJaxb2Marshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-    marshaller.setContextPath("mis.integration.ariadna.data");
+    marshaller.setClassesToBeBound(ReportRoot.class, RequestRoot.class, BaseVocabulary.class);
     return marshaller;
   }
 
