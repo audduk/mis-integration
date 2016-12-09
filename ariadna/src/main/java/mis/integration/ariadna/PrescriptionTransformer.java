@@ -80,8 +80,10 @@ public class PrescriptionTransformer {
 
   private OrderingInstitution getInstitution(DepartmentDTO department) {
     final OrderingInstitution result = new OrderingInstitution();
-    result.setId(Long.valueOf(department.getCode()));
-    result.setFullName(department.getName());
+    if (department != null) {
+      result.setId(Long.valueOf(department.getCode()));
+      result.setFullName(department.getName());
+    }
     return result;
   }
 
