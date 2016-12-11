@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Vocabulary>
+ <Domain>EXPLORE</Domain>
+ <Contents>
+  <item>
+   <ID>1</ID>
+   <Title>Исследования на флору</Title>
+  </item>
+  <!--changed-->
+  <item>
+   <ID>2</ID>
+   <Title>Исследования</Title>
+  </item>
+  <!--<item>-->
+   <!--<ID>3</ID>-->
+   <!--<Title>Исследование на воздушно-капельные инфекции</Title>-->
+  <!--</item>-->
+ </Contents>
+</Vocabulary>

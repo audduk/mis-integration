@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+             http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.springframework.org/schema/integration
+             http://www.springframework.org/schema/integration/spring-integration.xsd
+             http://www.springframework.org/schema/integration/xml
+             http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
+             http://www.springframework.org/schema/integration/file
+             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+
+  <!-- Зависимости конфигурации (используемые бины) -->
+  <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:bean class="mis.integration.ariadna.config.VocabularyConfig"/>
+  <beans:import resource="logger-integration.xml"/>
+  <context:property-placeholder location="classpath:application.properties"/>
+
+  <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
+  <file:inbound-channel-adapter id="md5VocInput" directory="file:${input.voc.directory}"
+                                filter="md5FileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+  <file:file-to-string-transformer input-channel="md5VocInput" output-channel="nullChannel"
+                                   delete-files="true"/>
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
+  <file:inbound-channel-adapter id="lisVocInput" directory="file:${input.voc.directory}"
+                                filter="xmlFileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+
+  <!-- Преобразование файла "Словарь", поступившего из ЛИС -->
+
+  <file:file-to-string-transformer input-channel="lisVocInput" output-channel="lisVocStringChannel"
+                                   charset="UTF-8"
+                                   delete-files="true"/>
+
+  <channel id="lisVocStringChannel" datatype="java.lang.String"/>
+
+  <chain input-channel="lisVocStringChannel">
+    <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
+    <header-enricher>
+      <header name="voc-domain" expression="payload.domain"/>
+    </header-enricher>
+    <header-value-router header-name="voc-domain" default-output-channel="unknownVocChannel">
+      <mapping value="EXPLORE"   channel="exploreVocChannel"/>
+      <mapping value="T_SAMPLE"  channel="unsupportedVocChannel"/>
+      <mapping value="KATPAC"    channel="unsupportedVocChannel"/>
+      <mapping value="CONDITION" channel="unsupportedVocChannel"/>
+      <mapping value="CONDITION_GROUP" channel="unsupportedVocChannel"/>
+    </header-value-router>
+  </chain>
+
+  <!-- Обработка словаря "Цель исследований" -->
+  <channel id="exploreVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary">
+    <interceptors>
+      <wire-tap channel="processVocChannel"/>
+    </interceptors>
+  </channel>
+  <service-activator input-channel="exploreVocChannel"
+                     expression="@exploreVocProcessor.process(payload.contents)"/>
+
+  <!-- Фиксируем факт обработки словаря -->
+  <channel id="processVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="processVocChannel" output-channel="loggerChannel"
+               expression="'Process vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+
+  <!-- Пропускаем необрабатываемый словарь -->
+  <channel id="unsupportedVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="unsupportedVocChannel" output-channel="loggerChannel"
+               expression="'Skip vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+
+  <!-- Обработка ошибочного (неизвестного словаря) -->
+  <channel id="unknownVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="unknownVocChannel" output-channel="loggerChannel"
+               expression="'Unknown vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+
+</beans:beans>
