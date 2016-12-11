@@ -55,7 +55,7 @@
       <mapping value="T_SAMPLE"  channel="unsupportedVocChannel"/>
       <mapping value="KATPAC"    channel="unsupportedVocChannel"/>
       <mapping value="CONDITION" channel="unsupportedVocChannel"/>
-      <mapping value="CONDITION_GROUP" channel="unsupportedVocChannel"/>
+      <mapping value="CONDITION_GROUP" channel="conditionGroupVocChannel"/>
     </header-value-router>
   </chain>
 
@@ -67,6 +67,15 @@
   </channel>
   <service-activator input-channel="exploreVocChannel"
                      expression="@exploreVocProcessor.process(payload.contents)"/>
+
+  <!-- Обработка словаря "Группа состояний пациента" (фазы цикла) -->
+  <channel id="conditionGroupVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary">
+    <interceptors>
+      <wire-tap channel="processVocChannel"/>
+    </interceptors>
+  </channel>
+  <service-activator input-channel="conditionGroupVocChannel"
+                     expression="@cyclePhaseProcessor.process(payload.contents)"/>
 
   <!-- Фиксируем факт обработки словаря -->
   <channel id="processVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>

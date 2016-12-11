@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Vocabulary>
+ <Domain>CONDITION_GROUP</Domain>
+ <Contents>
+  <item>
+   <ID>1</ID>
+   <Title>Состояние пациента</Title>
+   <CONDITION>
+    <item>
+     <ID>1</ID>
+     <Title>Здоровый</Title>
+    </item>
+    <item>
+     <ID>2</ID>
+     <Title>Нездоровый</Title>
+    </item>
+   </CONDITION>
+  </item>
+  <item>
+   <ID>2</ID>
+   <Title>Триместры беременности</Title>
+   <CONDITION>
+    <item>
+     <ID>3</ID>
+     <Title>1-ый триместр</Title>
+    </item>
+    <item>
+     <ID>4</ID>
+     <Title>2-ой триместр</Title>
+    </item>
+    <item>
+     <ID>5</ID>
+     <Title>3-ий триместр</Title>
+    </item>
+   </CONDITION>
+  </item>
+  <item>
+   <ID>3</ID>
+   <Title>Недели беременности</Title>
+   <CONDITION>
+    <item>
+     <ID>6</ID>
+     <Title>Беременность 1 неделя</Title>
+    </item>
+    <item>
+     <ID>7</ID>
+     <Title>Беременность 2 неделя</Title>
+    </item>
+    <item>
+     <ID>8</ID>
+     <Title>Беременность 3 неделя</Title>
+    </item>
+    <item>
+     <ID>9</ID>
+     <Title>Беременность 4 неделя</Title>
+    </item>
+    <item>
+     <ID>10</ID>
+     <Title>Беременность 5 неделя</Title>
+    </item>
+    <item>
+     <ID>11</ID>
+     <Title>Беременность 6 неделя</Title>
+    </item>
+    <item>
+     <ID>12</ID>
+     <Title>Беременность 7 неделя</Title>
+    </item>
+    <item>
+     <ID>13</ID>
+     <Title>Беременность 8 неделя</Title>
+    </item>
+    <item>
+     <ID>14</ID>
+     <Title>Беременность 9 неделя</Title>
+    </item>
+    <item>
+     <ID>15</ID>
+     <Title>Беременность 10 неделя</Title>
+    </item>
+    <item>
+     <ID>16</ID>
+     <Title>Беременность 11 неделя</Title>
+    </item>
+    <item>
+     <ID>17</ID>
+     <Title>Беременность 12 неделя</Title>
+    </item>
+    <item>
+     <ID>18</ID>
+     <Title>Беременность 13 неделя</Title>
+    </item>
+    <item>
+     <ID>19</ID>
+     <Title>Беременность 14 неделя</Title>
+    </item>
+    <item>
+     <ID>20</ID>
+     <Title>Беременность 15 неделя</Title>
+    </item>
+    <item>
+     <ID>21</ID>
+     <Title>Беременность 16 неделя</Title>
+    </item>
+    <item>
+     <ID>22</ID>
+     <Title>Беременность 17 неделя</Title>
+    </item>
+    <item>
+     <ID>23</ID>
+     <Title>Беременность 18 неделя</Title>
+    </item>
+    <item>
+     <ID>24</ID>
+     <Title>Беременность 19 неделя</Title>
+    </item>
+    <item>
+     <ID>25</ID>
+     <Title>Беременность 20 неделя</Title>
+    </item>
+    <item>
+     <ID>26</ID>
+     <Title>Беременность 21 неделя</Title>
+    </item>
+    <item>
+     <ID>27</ID>
+     <Title>Беременность 22 неделя</Title>
+    </item>
+    <item>
+     <ID>28</ID>
+     <Title>Беременность 23 неделя</Title>
+    </item>
+    <item>
+     <ID>29</ID>
+     <Title>Беременность 24 неделя</Title>
+    </item>
+    <item>
+     <ID>30</ID>
+     <Title>Беременность 25 неделя</Title>
+    </item>
+    <item>
+     <ID>31</ID>
+     <Title>Беременность 26 неделя</Title>
+    </item>
+    <item>
+     <ID>32</ID>
+     <Title>Беременность 27 неделя</Title>
+    </item>
+    <item>
+     <ID>33</ID>
+     <Title>Беременность 28 неделя</Title>
+    </item>
+    <item>
+     <ID>34</ID>
+     <Title>Беременность 29 неделя</Title>
+    </item>
+    <item>
+     <ID>35</ID>
+     <Title>Беременность 30 неделя</Title>
+    </item>
+    <item>
+     <ID>36</ID>
+     <Title>Беременность 31 неделя</Title>
+    </item>
+    <item>
+     <ID>37</ID>
+     <Title>Беременность 32 неделя</Title>
+    </item>
+    <item>
+     <ID>38</ID>
+     <Title>Беременность 33 неделя</Title>
+    </item>
+    <item>
+     <ID>39</ID>
+     <Title>Беременность 34 неделя</Title>
+    </item>
+    <item>
+     <ID>40</ID>
+     <Title>Беременность 35 неделя</Title>
+    </item>
+    <item>
+     <ID>41</ID>
+     <Title>Беременность 36 неделя</Title>
+    </item>
+    <item>
+     <ID>42</ID>
+     <Title>Беременность 37 неделя</Title>
+    </item>
+    <item>
+     <ID>43</ID>
+     <Title>Беременность 38 неделя</Title>
+    </item>
+    <item>
+     <ID>44</ID>
+     <Title>Беременность 39 неделя</Title>
+    </item>
+    <item>
+     <ID>45</ID>
+     <Title>Беременность 40 неделя</Title>
+    </item>
+    <item>
+     <ID>46</ID>
+     <Title>Беременность 41 неделя</Title>
+    </item>
+    <item>
+     <ID>47</ID>
+     <Title>Беременность 42 неделя</Title>
+    </item>
+   </CONDITION>
+  </item>
+  <item>
+   <ID>4</ID>
+   <Title>Фазы цикла</Title>
+   <CONDITION>
+    <item>
+     <ID>48</ID>
+     <Title>Фолликулиновая фаза 1-10 дней</Title>
+    </item>
+    <item>
+     <ID>49</ID>
+     <Title>Предовуляционная фаза 11-12 дней</Title>
+    </item>
+    <item>
+     <ID>50</ID>
+     <Title>Овуляционная фаза 13-14 дней</Title>
+    </item>
+    <item>
+     <ID>51</ID>
+     <Title>Лютеиновая фаза 15-28 дней</Title>
+    </item>
+    <item>
+     <ID>52</ID>
+     <Title>Постменопауза</Title>
+    </item>
+   </CONDITION>
+  </item>
+ </Contents>
+</Vocabulary>

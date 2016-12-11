@@ -22,14 +22,19 @@ import javax.xml.bind.Unmarshaller;
  * Тестирование обработчиков словарей
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ProcessorsTest.Config.class)
-public class ProcessorsTest extends AbstractAriadnaTest {
+@ContextConfiguration(classes = VocProcessorsTest.Config.class)
+public class VocProcessorsTest extends AbstractAriadnaTest {
   @Configuration
   @ImportResource(locations = "classpath:datasource.xml")
   public static class Config {
     @Bean(name = "exploreVocProcessor")
     public AbstractVocProcessor exploreVocProcessor() {
       return new ExploreVocProcessor();
+    }
+
+    @Bean(name = "cyclePhaseProcessor")
+    public AbstractVocProcessor cyclePhaseProcessor() {
+      return new CyclePhaseVocProcessor();
     }
   }
 
@@ -45,6 +50,8 @@ public class ProcessorsTest extends AbstractAriadnaTest {
   private JdbcTemplate jdbcTemplate;
   @Autowired
   private ExploreVocProcessor exploreVocProcessor;
+  @Autowired
+  private CyclePhaseVocProcessor cyclePhaseVocProcessor;
 
   @Test
   public void testExploreVocProcessorSimple() throws JAXBException {
@@ -64,6 +71,13 @@ public class ProcessorsTest extends AbstractAriadnaTest {
     exploreVocProcessor.process(voc.getContents());
     Assert.assertEquals(2,
         JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, exploreVocProcessor.tableName(), "entityStatus=0"));
+  }
+
+  @Test
+  public void testCyclePhaseVocProcessor() throws JAXBException {
+    BaseVocabulary voc = (BaseVocabulary) unmarshaller.unmarshal(getResourceAsStream("voc/condition_group.xml"));
+    cyclePhaseVocProcessor.process(voc.getContents());
+    Assert.assertEquals(5, JdbcTestUtils.countRowsInTable(jdbcTemplate, cyclePhaseVocProcessor.tableName()));
   }
 
 }
