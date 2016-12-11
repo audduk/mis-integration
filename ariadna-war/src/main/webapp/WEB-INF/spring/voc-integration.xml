@@ -3,7 +3,6 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
-             xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
              xmlns:file="http://www.springframework.org/schema/integration/file"
              xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="
@@ -15,13 +14,12 @@
              http://www.springframework.org/schema/integration/spring-integration.xsd
              http://www.springframework.org/schema/integration/xml
              http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
-             http://www.springframework.org/schema/integration/amqp
-             http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
   <!-- Зависимости конфигурации (используемые бины) -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:bean class="mis.integration.ariadna.config.VocabularyConfig"/>
   <beans:import resource="logger-integration.xml"/>
   <context:property-placeholder location="classpath:application.properties"/>
 
@@ -47,20 +45,42 @@
 
   <channel id="lisVocStringChannel" datatype="java.lang.String"/>
 
-  <chain input-channel="lisVocStringChannel" output-channel="misVocStringChannel">
+  <chain input-channel="lisVocStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <header-enricher>
-      <header name="domain" expression="payload.domain"/>
+      <header name="voc-domain" expression="payload.domain"/>
     </header-enricher>
-    <splitter expression="payload.contents"/>
+    <header-value-router header-name="voc-domain" default-output-channel="unknownVocChannel">
+      <mapping value="EXPLORE"   channel="exploreVocChannel"/>
+      <mapping value="T_SAMPLE"  channel="unsupportedVocChannel"/>
+      <mapping value="KATPAC"    channel="unsupportedVocChannel"/>
+      <mapping value="CONDITION" channel="unsupportedVocChannel"/>
+      <mapping value="CONDITION_GROUP" channel="unsupportedVocChannel"/>
+    </header-value-router>
   </chain>
 
-  <channel id="misVocStringChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseItem"/>
+  <!-- Обработка словаря "Цель исследований" -->
+  <channel id="exploreVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary">
+    <interceptors>
+      <wire-tap channel="processVocChannel"/>
+    </interceptors>
+  </channel>
+  <service-activator input-channel="exploreVocChannel"
+                     ref="exploreVocProcessor" method="process"/>
 
-  <!--TODO Тестовая конфигурация (сохранение в файл) -->
-  <bridge input-channel="misVocStringChannel" output-channel="nullChannel"/>
+  <!-- Фиксируем факт обработки словаря -->
+  <channel id="processVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="processVocChannel" output-channel="loggerChannel"
+               expression="'Process vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
 
-  <!-- Выполняем корректировку данных в базе -->
-  <!--TODO Разрбраться как быть с jdbc в данном случае -->
+  <!-- Пропускаем необрабатываемый словарь -->
+  <channel id="unsupportedVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="unsupportedVocChannel" output-channel="loggerChannel"
+               expression="'Skip vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+
+  <!-- Обработка ошибочного (неизвестного словаря) -->
+  <channel id="unknownVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <transformer input-channel="unknownVocChannel" output-channel="loggerChannel"
+               expression="'Unknown vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
 
 </beans:beans>
