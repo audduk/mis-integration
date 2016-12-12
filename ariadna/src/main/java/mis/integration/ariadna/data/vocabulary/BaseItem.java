@@ -18,6 +18,9 @@ public class BaseItem {
   @XmlElementWrapper(name = "CONDITION")
   @XmlElement(name = "item")
   private List<BaseItem> items; // расширение для словаря "Группа состояний пациента" (CONDITION_GROUP)
+  @XmlElementWrapper(name = "SpecimenTypes")
+  @XmlElement(name = "SpecimenType")
+  private List<BaseItem> specimens; // расширение для словаря "Услуги" (Services)
 
   public String getId() {
     return id;
@@ -41,5 +44,13 @@ public class BaseItem {
 
   public void setItems(List<BaseItem> items) {
     this.items = items;
+  }
+
+  public List<BaseItem> getSpecimens() {
+    return specimens;
+  }
+
+  public void setSpecimens(List<BaseItem> specimens) {
+    this.specimens = specimens;
   }
 }

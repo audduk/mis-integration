@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public abstract class AbstractVocProcessor {
   @Autowired
-  private JdbcTemplate jdbcTemplate;
+  protected JdbcTemplate jdbcTemplate;
 
   public abstract String tableName();
 
