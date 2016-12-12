@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Vocabulary>
+ <Domain>T_SAMPLE</Domain>
+ <Contents>
+  <item>
+   <ID>1</ID>
+   <ExternalID>КК</ExternalID>
+   <Title>Капиллярная кровь</Title>
+  </item>
+  <item>
+   <ID>2</ID>
+   <ExternalID>ВК</ExternalID>
+   <Title>Венозная кровь</Title>
+  </item>
+  <item>
+   <ID>3</ID>
+   <ExternalID>Сыв</ExternalID>
+   <Title>Сыворотка</Title>
+  </item>
+  <item>
+   <ID>4</ID>
+   <ExternalID>Плазма</ExternalID>
+   <Title>Плазма</Title>
+  </item>
+  <item>
+   <ID>5</ID>
+   <ExternalID>Моча</ExternalID>
+   <Title>Моча</Title>
+  </item>
+  <item>
+   <ID>6</ID>
+   <ExternalID>Кал</ExternalID>
+   <Title>Кал</Title>
+  </item>
+  <item>
+   <ID>7</ID>
+   <ExternalID>ВМ</ExternalID>
+   <Title>Вагинальный мазок</Title>
+  </item>
+  <item>
+   <ID>8</ID>
+   <ExternalID>СК</ExternalID>
+   <Title>Соскоб кожи</Title>
+  </item>
+  <item>
+   <ID>9</ID>
+   <ExternalID>СН</ExternalID>
+   <Title>Соскоб ногтя</Title>
+  </item>
+  <item>
+   <ID>10</ID>
+   <ExternalID>СЭ</ExternalID>
+   <Title>Соскоб на энтеробиоз</Title>
+  </item>
+  <item>
+   <ID>11</ID>
+   <ExternalID>МН</ExternalID>
+   <Title>Мазок из носа</Title>
+  </item>
+  <item>
+   <ID>12</ID>
+   <ExternalID>ОПО</ExternalID>
+   <Title>Отделяемое половых органов</Title>
+  </item>
+  <item>
+   <ID>13</ID>
+   <ExternalID>Аспират</ExternalID>
+   <Title>Аспират</Title>
+  </item>
+  <item>
+   <ID>14</ID>
+   <ExternalID>комп</ExternalID>
+   <Title>Комплексный</Title>
+  </item>
+  <item>
+   <ID>15</ID>
+   <Title>Моча суточная</Title>
+  </item>
+  <item>
+   <ID>16</ID>
+   <Title>Эякулят</Title>
+  </item>
+  <item>
+   <ID>17</ID>
+   <Title>кровь</Title>
+  </item>
+ </Contents>
+</Vocabulary>

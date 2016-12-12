@@ -52,7 +52,7 @@
     </header-enricher>
     <header-value-router header-name="voc-domain" default-output-channel="unknownVocChannel">
       <mapping value="EXPLORE"   channel="exploreVocChannel"/>
-      <mapping value="T_SAMPLE"  channel="unsupportedVocChannel"/>
+      <mapping value="T_SAMPLE"  channel="specimenVocChannel"/>
       <mapping value="KATPAC"    channel="unsupportedVocChannel"/>
       <mapping value="CONDITION" channel="unsupportedVocChannel"/>
       <mapping value="CONDITION_GROUP" channel="conditionGroupVocChannel"/>
@@ -76,6 +76,15 @@
   </channel>
   <service-activator input-channel="conditionGroupVocChannel"
                      expression="@cyclePhaseProcessor.process(payload.contents)"/>
+
+  <!-- Обработка словаря "Тип биоматериала" -->
+  <channel id="specimenVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary">
+    <interceptors>
+      <wire-tap channel="processVocChannel"/>
+    </interceptors>
+  </channel>
+  <service-activator input-channel="specimenVocChannel"
+                     expression="@specimenVocProcessor.process(payload.contents)"/>
 
   <!-- Фиксируем факт обработки словаря -->
   <channel id="processVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>

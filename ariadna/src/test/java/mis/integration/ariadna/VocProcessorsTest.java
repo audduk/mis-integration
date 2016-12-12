@@ -36,6 +36,11 @@ public class VocProcessorsTest extends AbstractAriadnaTest {
     public AbstractVocProcessor cyclePhaseProcessor() {
       return new CyclePhaseVocProcessor();
     }
+
+    @Bean(name = "specimenVocProcessor")
+    public AbstractVocProcessor specimenVocProcessor() {
+      return new SpecimenVocProcessor();
+    }
   }
 
   private Unmarshaller unmarshaller;
@@ -52,6 +57,8 @@ public class VocProcessorsTest extends AbstractAriadnaTest {
   private ExploreVocProcessor exploreVocProcessor;
   @Autowired
   private CyclePhaseVocProcessor cyclePhaseVocProcessor;
+  @Autowired
+  private SpecimenVocProcessor specimenVocProcessor;
 
   @Test
   public void testExploreVocProcessorSimple() throws JAXBException {
@@ -78,6 +85,13 @@ public class VocProcessorsTest extends AbstractAriadnaTest {
     BaseVocabulary voc = (BaseVocabulary) unmarshaller.unmarshal(getResourceAsStream("voc/condition_group.xml"));
     cyclePhaseVocProcessor.process(voc.getContents());
     Assert.assertEquals(5, JdbcTestUtils.countRowsInTable(jdbcTemplate, cyclePhaseVocProcessor.tableName()));
+  }
+
+  @Test
+  public void testSpecimensVocProcessor() throws JAXBException {
+    BaseVocabulary voc = (BaseVocabulary) unmarshaller.unmarshal(getResourceAsStream("voc/specimens.xml"));
+    specimenVocProcessor.process(voc.getContents());
+    Assert.assertEquals(17, JdbcTestUtils.countRowsInTable(jdbcTemplate, specimenVocProcessor.tableName()));
   }
 
 }
