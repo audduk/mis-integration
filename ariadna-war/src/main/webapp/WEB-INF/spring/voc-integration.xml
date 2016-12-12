@@ -87,18 +87,18 @@
                      expression="@specimenVocProcessor.process(payload.contents)"/>
 
   <!-- Фиксируем факт обработки словаря -->
-  <channel id="processVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <channel id="processVocChannel"/>
   <transformer input-channel="processVocChannel" output-channel="loggerChannel"
-               expression="'Process vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+               expression="'Process vocabulary: ' + headers.get('voc-domain') + ' file: ' + headers.get('file_name')"/>
 
   <!-- Пропускаем необрабатываемый словарь -->
-  <channel id="unsupportedVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <channel id="unsupportedVocChannel"/>
   <transformer input-channel="unsupportedVocChannel" output-channel="loggerChannel"
-               expression="'Skip vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+               expression="'Skip vocabulary: ' + headers.get('voc-domain') + ' file: ' + headers.get('file_name')"/>
 
   <!-- Обработка ошибочного (неизвестного словаря) -->
-  <channel id="unknownVocChannel" datatype="mis.integration.ariadna.data.vocabulary.BaseVocabulary"/>
+  <channel id="unknownVocChannel"/>
   <transformer input-channel="unknownVocChannel" output-channel="loggerChannel"
-               expression="'Unknown vocabulary: ' + payload.domain + ' file: ' + headers.get('file_name')"/>
+               expression="'Unknown vocabulary: ' + headers.get('voc-domain') + ' file: ' + headers.get('file_name')"/>
 
 </beans:beans>

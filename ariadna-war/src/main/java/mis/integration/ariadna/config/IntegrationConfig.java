@@ -7,6 +7,7 @@ import mis.integration.ariadna.PrescriptionTransformer;
 import mis.integration.ariadna.data.ReportRoot;
 import mis.integration.ariadna.data.RequestRoot;
 import mis.integration.ariadna.data.vocabulary.BaseVocabulary;
+import mis.integration.ariadna.data.vocabulary.ServiceVocabulary;
 import mis.integration.ariadna.file.PdfSplitter;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
@@ -31,7 +32,8 @@ public class IntegrationConfig {
   @Bean(name = "ariadnaJaxb2Marshaller")
   public Jaxb2Marshaller ariadnaJaxb2Marshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-    marshaller.setClassesToBeBound(ReportRoot.class, RequestRoot.class, BaseVocabulary.class);
+    marshaller.setClassesToBeBound(ReportRoot.class, RequestRoot.class,
+        BaseVocabulary.class, ServiceVocabulary.class);
     return marshaller;
   }
 

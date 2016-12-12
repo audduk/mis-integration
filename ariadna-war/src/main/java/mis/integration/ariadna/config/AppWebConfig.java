@@ -11,6 +11,7 @@ import org.springframework.context.annotation.*;
 @ImportResource(locations = {
     "/WEB-INF/spring/report-integration.xml",
     "/WEB-INF/spring/request-integration.xml",
-    "/WEB-INF/spring/voc-integration.xml"})
+    "/WEB-INF/spring/voc-integration.xml",
+    "/WEB-INF/spring/services-integration.xml"})
 public class AppWebConfig {
 }

@@ -1,9 +1,6 @@
 package mis.integration.ariadna.config;
 
-import mis.integration.ariadna.AbstractVocProcessor;
-import mis.integration.ariadna.CyclePhaseVocProcessor;
-import mis.integration.ariadna.ExploreVocProcessor;
-import mis.integration.ariadna.SpecimenVocProcessor;
+import mis.integration.ariadna.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +19,10 @@ public class VocabularyConfig {
   @Bean(name = "specimenVocProcessor")
   public AbstractVocProcessor specimenVocProcessor() {
     return new SpecimenVocProcessor();
+  }
+
+  @Bean(name = "servicesVocProcessor")
+  public AbstractVocProcessor servicesVocProcessor() {
+    return new ServicesVocProcessor();
   }
 }

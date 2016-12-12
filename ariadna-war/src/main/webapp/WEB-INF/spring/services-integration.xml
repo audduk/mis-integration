@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+             http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.springframework.org/schema/integration
+             http://www.springframework.org/schema/integration/spring-integration.xsd
+             http://www.springframework.org/schema/integration/xml
+             http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
+             http://www.springframework.org/schema/integration/file
+             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+
+  <!-- Зависимости конфигурации (используемые бины) -->
+  <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:bean class="mis.integration.ariadna.config.VocabularyConfig"/>
+  <beans:import resource="logger-integration.xml"/>
+  <beans:import resource="voc-integration.xml"/>
+  <context:property-placeholder location="classpath:application.properties"/>
+
+  <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
+  <file:inbound-channel-adapter id="md5SrvInput" directory="file:${input.svc.directory}"
+                                filter="md5FileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+  <file:file-to-string-transformer input-channel="md5SrvInput" output-channel="nullChannel"
+                                   delete-files="true"/>
+
+  <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
+  <file:inbound-channel-adapter id="lisSrvInput" directory="file:${input.svc.directory}"
+                                filter="xmlFileFilter">
+    <poller fixed-delay="50"/>
+  </file:inbound-channel-adapter>
+
+  <!-- Преобразование файла "Услуги", поступившего из ЛИС -->
+
+  <chain input-channel="lisSrvInput" output-channel="servicesVocChannel">
+    <header-enricher>
+      <header name="voc-domain" expression="'SERVICES'"/>
+    </header-enricher>
+    <file:file-to-string-transformer charset="UTF-8" delete-files="true"/>
+    <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
+  </chain>
+
+  <!-- Обработка словаря "Цель исследований" -->
+  <channel id="servicesVocChannel" datatype="mis.integration.ariadna.data.vocabulary.ServiceVocabulary">
+    <interceptors>
+      <wire-tap channel="processVocChannel"/> <!-- see voc-integration.xml -->
+    </interceptors>
+  </channel>
+  <service-activator input-channel="servicesVocChannel"
+                     expression="@servicesVocProcessor.process(payload.services)"/>
+
+</beans:beans>
