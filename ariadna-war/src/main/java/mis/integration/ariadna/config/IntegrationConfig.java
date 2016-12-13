@@ -1,9 +1,6 @@
 package mis.integration.ariadna.config;
 
-import mis.integration.ariadna.Md5Transformer;
-import mis.integration.ariadna.ReportTransformer;
-import mis.integration.ariadna.RequestFileNameGenerator;
-import mis.integration.ariadna.PrescriptionTransformer;
+import mis.integration.ariadna.*;
 import mis.integration.ariadna.data.ReportRoot;
 import mis.integration.ariadna.data.RequestRoot;
 import mis.integration.ariadna.data.vocabulary.BaseVocabulary;
@@ -103,5 +100,10 @@ public class IntegrationConfig {
   @Bean(name = "pdfSplitter")
   public PdfSplitter pdfSplitter() {
     return new PdfSplitter();
+  }
+
+  @Bean(name = "serviceCodeFinder")
+  public ServiceCodeFinder serviceCodeFinder() {
+    return new ServiceCodeFinder();
   }
 }

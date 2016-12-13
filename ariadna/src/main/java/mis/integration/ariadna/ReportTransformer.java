@@ -17,17 +17,20 @@ import java.util.List;
 public class ReportTransformer {
   public List<Report> transformToReport(Observation observation) throws ReportDataException {
     final List<Report> result = new ArrayList<>();
+    final List<OrderItem> orderItems = observation.getOrderItems();
+    if (orderItems == null || orderItems.isEmpty())
+      throw new ReportDataException("Отсутствует содержание заказа (orderItems)", observation);
     if (observation.getReportGroups() == null)
       throw new ReportDataException("Не заполнено поле Observation.ReportsGroup", observation);
     for (ReportGroup group : observation.getReportGroups()) {
       final Report report = generateReport(observation);
-      fillReport(report, group);
+      fillReport(report, group, orderItems);
       result.add(report);
     }
     return result;
   }
 
-  private static void fillReport(Report report, ReportGroup group) {
+  private static void fillReport(Report report, ReportGroup group, List<OrderItem> orderItems) {
     final SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd hh:mm:ss YYYY");
 
     final Info info = report.getInfo();
@@ -37,12 +40,17 @@ public class ReportTransformer {
     info.setLogin(group.getVerifierID().toString());//todo добавить определение логина, важно
 
     final Report.Additional.Lis lis = report.getAdditional().getLis();
-    final List<Result.Service> serviceList = lis.getResult().getService();
-    assert serviceList.size() == 1; //ожидается ровно один элемент (см. реализацию generateReport)
-    final List<Result.Service.Indicator> indicatorList = serviceList.get(0).getIndicator();
+    final Result.Service service = new Result.Service();
+    lis.getResult().getService().add(service);
+    Long serviceId = null;
+    final List<Result.Service.Indicator> indicatorList = service.getIndicator();
     for (ObservationResult observationResult : group.getResults()) {
       if ("H".equals(observationResult.getHeaderMark())) //пропускаем элементы-заголовки
         continue;
+      if (serviceId == null) {
+        serviceId = observationResult.getOrderedServiceID();
+        service.setCode(getOrderCodeById(orderItems, serviceId));
+      }
       final Result.Service.Indicator indicator = new Result.Service.Indicator();
       indicator.setName(observationResult.getMeasurementName());
       indicator.setValue(observationResult.getResultValue());
@@ -51,6 +59,13 @@ public class ReportTransformer {
       indicator.setMin(observationResult.getNormMin());
       indicatorList.add(indicator);
     }
+  }
+
+  private static String getOrderCodeById(List<OrderItem> orderItems, Long id) {
+    for (OrderItem orderItem : orderItems)
+      if (orderItem.getServiceID().equals(id))
+        return orderItem.getServiceCode();
+    throw new RuntimeException("");
   }
 
   /**
@@ -75,16 +90,6 @@ public class ReportTransformer {
 
     final Report.Additional.Lis lis = report.getAdditional().getLis();
     lis.setResult(new Result());
-    final List<OrderItem> orderItems = observation.getOrderItems();
-    if (orderItems == null || orderItems.isEmpty())
-      throw new ReportDataException("Отсутствует содержание заказа (orderItems)", observation);
-    if (orderItems.size() > 1) //todo разобраться с этим - может ли быть несколько, как между ними делятся группы (сделан запрос производителю)
-      throw new ReportDataException("Ожидается orderItems.size = 1", observation);
-    for (OrderItem orderItem : orderItems) {
-      final Result.Service service = new Result.Service();
-      service.setCode(orderItem.getServiceCode());
-      lis.getResult().getService().add(service);
-    }
 
     return report;
   }

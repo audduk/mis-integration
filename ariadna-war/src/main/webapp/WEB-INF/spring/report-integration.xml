@@ -66,7 +66,7 @@
       <!--Запоминаем полученный объект report (будет использоваться при построении pdf) -->
       <header name="report" expression="payload"/>
       <!-- Задаем имя "шпионского" zip-файла с протоколом, передаваемым в МИС -->
-      <header name="zip_name" expression="headers.get('file_name') + '-' + payload.order.externalID + '.zip'"/>
+      <header name="zip_name" expression="headers.get('file_name') + '-' + @serviceCodeFinder.getCode(payload) + '.zip'"/>
     </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
