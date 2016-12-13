@@ -49,7 +49,7 @@ public class Patient {
   private Calendar birthDate;
   /** RegDate		Дата регистрации	DATE */
   @XmlJavaTypeAdapter(DateAdapter.class)
-  @XmlElement(name = "RegDate") //TODO Выяснить что тут ожидается и от кого
+  @XmlElement(name = "RegDate")
   private Calendar regDate;
   /** ConditionID		Состояние пациента, ID по справочнику	NUMBER(12) */
   @XmlElement(name = "ConditionID")

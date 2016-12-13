@@ -82,7 +82,7 @@ public class Observation {
   private OrderingInstitution institution;
   /** OrderInfo		Информация о заказе, контейнер для элементов "item" */
   @XmlElementWrapper(name = "OrderInfo")
-  @XmlElement(name = "item") //TODO Подтвердить, что "item" пишется с маленькой буквы (в описании с большой)
+  @XmlElement(name = "item")
   private List<OrderItem> orderItems;
   /** ObservationReport		Результаы исследований, контейнер для элементов ReportGroup */
   @XmlElementWrapper(name = "ObservationReport")
