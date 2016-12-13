@@ -101,13 +101,26 @@ public class PrescriptionTransformer {
     return result;
   }
 
-  //TODO !!!
   private void fillPatientCondition(Patient patient, PrescriptionDTO dto) {
-    final DirectoryItemDTO itemDTO = dto.getPatient().getSocialStatus();
-    if (itemDTO == null)
-      return;
-    patient.setConditionID(itemDTO.getCode());
-    patient.setCondition(itemDTO.getName());
+    if (dto.getPrescription().getPatientResume() instanceof PatientFemaleResumeDTO) {
+      PatientFemaleResumeDTO resume = (PatientFemaleResumeDTO) dto.getPrescription().getPatientResume();
+      if (resume.getCyclePhase() != null) {
+        patient.setConditionID(resume.getCyclePhase().getCode());
+        patient.setCondition(resume.getCyclePhase().getName());
+        return;
+      }
+      if (resume.getPregnancyMax() != null) {
+        final Integer week = getPregnancyWeek(resume.getPregnancyMax());
+        if (week > 42)
+          return;
+        patient.setConditionID(Integer.toString(6 + (week-1)));
+        patient.setCondition(String.format("Беременность %d неделя", week));
+      }
+    }
+  }
+
+  public static Integer getPregnancyWeek(Integer daysMax) {
+    return (daysMax / 7) + 1;
   }
 
   private String getGender(DirectoryItemDTO sex) {

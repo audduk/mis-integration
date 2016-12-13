@@ -9,9 +9,11 @@ import org.junit.Test;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.HashSet;
+
+import static mis.integration.ariadna.PrescriptionTransformer.getPregnancyWeek;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Тестирование трансформера
@@ -24,6 +26,14 @@ public class PrescriptionTransformerTest {
   public void init() throws Exception {
     JAXBContext jc = JAXBContext.newInstance(PrescriptionDTO.class);
     reportMarshaller = jc.createMarshaller();
+  }
+
+  @Test
+  public void testWeekCalc() {
+    assertEquals((long) 1, (long) getPregnancyWeek(1));
+    assertEquals((long) 2, (long) getPregnancyWeek(7));
+    assertEquals((long) 2, (long) getPregnancyWeek(8));
+    assertEquals((long) 3, (long) getPregnancyWeek(14));
   }
 
   @Test
