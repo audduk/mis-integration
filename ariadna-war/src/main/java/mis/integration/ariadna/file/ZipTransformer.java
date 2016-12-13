@@ -30,6 +30,7 @@ import org.springframework.util.Assert;
 import org.zeroturnaround.zip.ByteSource;
 import org.zeroturnaround.zip.ZipEntrySource;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.zip.Deflater;
@@ -61,6 +62,7 @@ public class ZipTransformer extends AbstractZipTransformer {
   private volatile int compressionLevel = Deflater.DEFAULT_COMPRESSION;
 
   public ZipTransformer() {
+    charset = Charset.forName("UTF-8");
     zipResultType = ZipResultType.BYTE_ARRAY;
   }
 
