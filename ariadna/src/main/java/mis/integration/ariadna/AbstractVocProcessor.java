@@ -20,6 +20,10 @@ public abstract class AbstractVocProcessor {
 
   public abstract String tableName();
 
+  public String where() {
+    return "";
+  }
+
   public void process(List<BaseItem> itemList) {
     disableAllItems();
     if (itemList.size() == 0)
@@ -77,6 +81,9 @@ public abstract class AbstractVocProcessor {
 
     /** Деактивация всех словарных значений (по умолчанию всех записей таблицы {@link #tableName()}) */
   protected void disableAllItems() {
-    jdbcTemplate.update(String.format("UPDATE %s SET entityStatus=1", tableName()));
+    String hideSql = String.format("UPDATE %s e SET entityStatus=1", tableName());
+    if (!where().isEmpty())
+      hideSql += " WHERE " + where();
+    jdbcTemplate.update(hideSql);
   }
 }
