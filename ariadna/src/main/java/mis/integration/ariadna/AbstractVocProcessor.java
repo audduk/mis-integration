@@ -46,14 +46,10 @@ public abstract class AbstractVocProcessor {
   protected int[] batchUpdate(final List<BaseItem> items) {
     return jdbcTemplate.batchUpdate(
         String.format("UPDATE %s SET version=version+1, entityStatus=0, name=? where code=?", tableName()),
-        new BatchPreparedStatementSetter() {
+        new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, items.get(i).getTitle());
             ps.setString(2, items.get(i).getId());
-          }
-
-          public int getBatchSize() {
-            return items.size();
           }
         });
   }
@@ -65,16 +61,11 @@ public abstract class AbstractVocProcessor {
                 "VALUES ((SELECT COUNT(id)+1 FROM %s), 0, 0, ?, ?, ?)",
             tableName(), tableName()
         ),
-        new BatchPreparedStatementSetter() {
+        new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
-//            ps.setLong(1, 0);
             ps.setString(1, UUID.randomUUID().toString().toLowerCase());
             ps.setString(2, items.get(i).getId());
             ps.setString(3, items.get(i).getTitle());
-          }
-
-          public int getBatchSize() {
-            return items.size();
           }
         });
   }
@@ -85,5 +76,18 @@ public abstract class AbstractVocProcessor {
     if (!where().isEmpty())
       hideSql += " WHERE " + where();
     jdbcTemplate.update(hideSql);
+  }
+
+  protected static abstract class BatchStatementSetter implements BatchPreparedStatementSetter {
+    final List<BaseItem> items;
+
+    BatchStatementSetter(List<BaseItem> items) {
+      this.items = items;
+    }
+
+    @Override
+    public int getBatchSize() {
+      return items.size();
+    }
   }
 }
