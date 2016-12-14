@@ -63,9 +63,17 @@ public class ServicesProcessorsTest extends AbstractAriadnaTest {
     // выполняем загрузку словаря "Услуги"
     ServiceVocabulary serviceVocabulary = (ServiceVocabulary) unmarshaller.unmarshal(getResourceAsStream("voc/services.xml"));
     servicesVocProcessor.process(serviceVocabulary.getServices());
+    assertDataBaseState();
+    //при повторной загрузке не должно ничего поменяться
+    servicesVocProcessor.process(serviceVocabulary.getServices());
+    assertDataBaseState();
+  }
+
+  private void assertDataBaseState() {
     Assert.assertEquals(103, JdbcTestUtils.countRowsInTable(jdbcTemplate, servicesVocProcessor.tableName()));
     Assert.assertEquals(103, JdbcTestUtils.countRowsInTable(jdbcTemplate, "LINK_A_BIOMATERIALS"));
     Assert.assertEquals(103, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "fType_id=1"));
+    Assert.assertEquals(103, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "name = shortname"));
   }
 
   @Test

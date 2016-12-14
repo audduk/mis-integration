@@ -47,24 +47,33 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   }
 
   @Override
+  protected int[] batchUpdate(final List<BaseItem> items) {
+    return jdbcTemplate.batchUpdate(
+        String.format("UPDATE %s SET version=version+1, entityStatus=0, name=?, shortname=? where code=?", tableName()),
+        new BatchStatementSetter(items) {
+          public void setValues(PreparedStatement ps, int i) throws SQLException {
+            ps.setString(1, items.get(i).getTitle());
+            ps.setString(2, items.get(i).getTitle());
+            ps.setString(3, items.get(i).getId());
+          }
+        });
+  }
+
+  @Override
   protected int[] batchInsert(final List<BaseItem> items) {
     return jdbcTemplate.batchUpdate(
         String.format(
-            "INSERT INTO %s (id, version, entityStatus, ENTITY_UID, code, name, fType_id) " +
-                "VALUES ((SELECT COUNT(id)+1 FROM %s), 0, 0, ?, ?, ?, ?)",
+            "INSERT INTO %s (id, version, entityStatus, ENTITY_UID, code, name, shortname, fType_id) " +
+                "VALUES ((SELECT COUNT(id)+1 FROM %s), 0, 0, ?, ?, ?, ?, ?)",
             tableName(), tableName()
         ),
-        new BatchPreparedStatementSetter() {
+        new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
-//            ps.setLong(1, 0);
             ps.setString(1, UUID.randomUUID().toString().toLowerCase());
             ps.setString(2, items.get(i).getId());
             ps.setString(3, items.get(i).getTitle());
-            ps.setLong(4, fTypeId);
-          }
-
-          public int getBatchSize() {
-            return items.size();
+            ps.setString(4, items.get(i).getTitle());
+            ps.setLong(5, fTypeId);
           }
         });
   }

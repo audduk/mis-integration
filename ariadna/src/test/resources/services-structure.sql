@@ -26,6 +26,7 @@ CREATE TABLE DIR_MED_SIMPLE_SERVICE (
     entitystatus BIGINT,
     fType_id BIGINT REFERENCES DIR_MED_SIMPLE_SERVICE_FTYPE(ID),
     code character varying(255) NOT NULL,
+    shortname character varying(255) NOT NULL,
     name character varying(255) NOT NULL
 );
 
