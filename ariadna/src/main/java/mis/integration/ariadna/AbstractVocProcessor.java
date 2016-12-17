@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,17 +30,36 @@ public abstract class AbstractVocProcessor {
     disableAllItems();
     if (itemList.size() == 0)
       return;;
-    int[] affectedList = batchUpdate(itemList);
-    final List<BaseItem> itemsToInsert = filterAffected(itemList, affectedList);
+    batchUpdate(itemList);
+
+    final List<String> affectedCodes = getAffectedCodes(getCodes(itemList));
+    final List<BaseItem> itemsToInsert = filterAffected(itemList, affectedCodes);
     if (itemsToInsert.size() > 0)
       batchInsert(itemsToInsert);
   }
 
-  protected List<BaseItem> filterAffected(List<BaseItem> itemList, int[] affectedList) {
-    List<BaseItem> result = new ArrayList<>(itemList.size() - affectedList.length);
-    for (int i = 0; i < itemList.size(); ++i) {
-      if (affectedList[i] <= 0)
-        result.add(itemList.get(i));
+  private List<String> getAffectedCodes(List<String> codeList) {
+    List<String> result = new ArrayList<>();
+    for (String code : codeList) {
+      List<Map<String, Object>> rows = jdbcTemplate.queryForList(String.format("SELECT id FROM %s WHERE code = '%s'", tableName(), code));
+      if (rows.size() > 0)
+        result.add(code);
+    }
+    return result;
+  }
+
+  protected List<String> getCodes(List<BaseItem> itemList) {
+    List<String> result = new ArrayList<>(itemList.size());
+    for (BaseItem item : itemList)
+      result.add(item.getId());
+    return result;
+  }
+
+  protected List<BaseItem> filterAffected(List<BaseItem> itemList, List<String> codeList) {
+    List<BaseItem> result = new ArrayList<>(itemList.size() - codeList.size());
+    for (BaseItem anItemList : itemList) {
+      if (!codeList.contains(anItemList.getId()))
+        result.add(anItemList);
     }
     return result;
   }
