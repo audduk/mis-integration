@@ -36,11 +36,13 @@ public class PrescriptionTransformer {
     if (diagnosis != null)
       observation.setDiagnosis(diagnosis.getCode());
     final Set<BiomaterialDTO> biomaterials = prescription.getBiomaterials();
-    if (biomaterials == null || biomaterials.isEmpty())
-      throw new PrescriptionDataException("Не задан биометериал");
-    final BiomaterialDTO biomaterial = biomaterials.iterator().next();
-    observation.setSpecimenTypeID(Long.valueOf(biomaterial.getCode()));
-    observation.setSpecimenType(biomaterial.getName());
+    if (biomaterials == null || biomaterials.isEmpty()) {
+      ;//throw new PrescriptionDataException("Не задан биоматериал"); //временно отключаем проверку (МИС может отсылать пустой биоматериал)
+    } else {
+      final BiomaterialDTO biomaterial = biomaterials.iterator().next();
+      observation.setSpecimenTypeID(Long.valueOf(biomaterial.getCode()));
+      observation.setSpecimenType(biomaterial.getName());
+    }
     final BiomaterialTakingPlaceDTO takingPlaceDTO = prescription.getBiomaterialTakingPlace();
     if (takingPlaceDTO != null) {
       observation.setSpecimenSiteID(Long.valueOf(takingPlaceDTO.getCode()));

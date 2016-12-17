@@ -26,20 +26,18 @@
   <beans:import resource="logger-integration.xml"/>
   <context:property-placeholder location="classpath:application.properties"/>
 
-  <!--TODO Временное решение для отладки, в боевом режиме оставляем только amqp -->
-  <file:inbound-channel-adapter id="lisRequestFileInput"
-                                directory="file:${input.request.directory}"
-                                channel="misPrescriptionFileChannel">
+  <!-- Решение для отладки (загрузка назначения в формате МИС из файла в каталоге ${input.request.directory}) -->
+  <!--<file:inbound-channel-adapter id="lisRequestFileInput" directory="file:${input.request.directory}">
     <poller fixed-delay="50"/>
   </file:inbound-channel-adapter>
-  <channel id="misPrescriptionFileChannel"/>
-  <file:file-to-string-transformer input-channel="misPrescriptionFileChannel" output-channel="misPrescriptionStringChannel"
-                                   delete-files="true"/>
+  <file:file-to-string-transformer input-channel="lisRequestFileInput" output-channel="misPrescriptionStringChannel" delete-files="true"/>-->
+  <!-- завершение решения для отладки -->
 
   <!-- Считываем "Заявку на ЛИ" из очереди (исходящей) МИСа -->
-  <!--<int-amqp:inbound-channel-adapter channel="misPrescriptionStringChannel"
+  <int-amqp:inbound-channel-adapter channel="misPrescriptionStringChannel"
                                     connection-factory="connectionFactory"
-                                    queue-names="${input.request.queue:prescription.create}"/>-->
+                                    acknowledge-mode="NONE"
+                                    queue-names="${input.request.queue:prescription.create.queue}"/>
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
@@ -79,7 +77,7 @@
 
   <!-- Записываем результат преобразования в исходящие файлы (в соответствии с протоколом) -->
 
-  <file:outbound-channel-adapter
+  <file:outbound-channel-adapter charset="UTF-8"
       channel="observationStringChannel"
       filename-generator="xmlReportFileGenerator"
       directory="file:${output.request.directory}"/>
