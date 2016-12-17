@@ -26,7 +26,7 @@
   <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
   <file:inbound-channel-adapter id="md5VocInput" directory="file:${input.voc.directory}"
                                 filter="md5FileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
   <file:file-to-string-transformer input-channel="md5VocInput" output-channel="nullChannel"
                                    delete-files="true"/>
@@ -34,7 +34,7 @@
   <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
   <file:inbound-channel-adapter id="lisVocInput" directory="file:${input.voc.directory}"
                                 filter="xmlFileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
 
   <!-- Преобразование файла "Словарь", поступившего из ЛИС -->

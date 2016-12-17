@@ -27,7 +27,7 @@
   <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
   <file:inbound-channel-adapter id="md5SrvInput" directory="file:${input.svc.directory}"
                                 filter="md5FileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
   <file:file-to-string-transformer input-channel="md5SrvInput" output-channel="nullChannel"
                                    delete-files="true"/>
@@ -35,7 +35,7 @@
   <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
   <file:inbound-channel-adapter id="lisSrvInput" directory="file:${input.svc.directory}"
                                 filter="xmlFileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
 
   <!-- Преобразование файла "Услуги", поступившего из ЛИС -->

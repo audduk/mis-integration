@@ -29,7 +29,7 @@
   <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
   <file:inbound-channel-adapter id="md5ReportInput" directory="file:${input.report.directory}"
                                 filter="md5FileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
 
   <file:file-to-string-transformer input-channel="md5ReportInput" output-channel="nullChannel"
@@ -38,7 +38,7 @@
   <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
   <file:inbound-channel-adapter id="lisReportInput" directory="file:${input.report.directory}"
                                 filter="xmlFileFilter">
-    <poller fixed-delay="50"/>
+    <poller fixed-delay="5000"/>
   </file:inbound-channel-adapter>
 
   <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
