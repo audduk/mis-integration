@@ -32,7 +32,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   private void init() {
     List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT id FROM DIR_MED_SIMPLE_SERVICE_FTYPE WHERE code = '02'");
     if (rows.size() > 0)
-      fTypeId = (Long) rows.get(0).get("id");
+      fTypeId = Long.parseLong(rows.get(0).get("id").toString());
   }
 
   @Override
