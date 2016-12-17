@@ -14,6 +14,11 @@ public class CyclePhaseVocProcessor extends AbstractVocProcessor {
   }
 
   @Override
+  public String sequenceName() {
+    return "DIR_CYCLE_PHASE_ID_SEQ";
+  }
+
+  @Override
   public void process(List<BaseItem> itemList) {
     for (BaseItem item : itemList)
       if ("4".equals(item.getId()))

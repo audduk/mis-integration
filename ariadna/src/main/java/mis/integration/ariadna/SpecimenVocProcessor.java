@@ -8,4 +8,9 @@ public class SpecimenVocProcessor extends AbstractVocProcessor {
   public String tableName() {
     return "DIR_BIOMATERIALS";
   }
+
+  @Override
+  public String sequenceName() {
+    return "DIR_BIOMATERIAL_ID_SEQ";
+  }
 }

@@ -19,6 +19,7 @@ public abstract class AbstractVocProcessor {
   protected JdbcTemplate jdbcTemplate;
 
   public abstract String tableName();
+  public abstract String sequenceName();
 
   public String where() {
     return "";
@@ -37,7 +38,7 @@ public abstract class AbstractVocProcessor {
   protected List<BaseItem> filterAffected(List<BaseItem> itemList, int[] affectedList) {
     List<BaseItem> result = new ArrayList<>(itemList.size() - affectedList.length);
     for (int i = 0; i < itemList.size(); ++i) {
-      if (affectedList[i] == 0)
+      if (affectedList[i] <= 0)
         result.add(itemList.get(i));
     }
     return result;
@@ -58,8 +59,8 @@ public abstract class AbstractVocProcessor {
     return jdbcTemplate.batchUpdate(
         String.format(
             "INSERT INTO %s (id, version, entityStatus, ENTITY_UID, code, name) " +
-                "VALUES ((SELECT COUNT(id)+1 FROM %s), 0, 0, ?, ?, ?)",
-            tableName(), tableName()
+                "VALUES (%s.NEXTVAL, 0, 0, ?, ?, ?)",
+            tableName(), sequenceName()
         ),
         new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {

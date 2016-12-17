@@ -22,6 +22,11 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   }
 
   @Override
+  public String sequenceName() {
+    return "DIR_MED_MANIPULATION_ID_SEQ";
+  }
+
+  @Override
   public String where() {
     return String.format(" e.fType_id = %d", fTypeId);
   }
@@ -64,8 +69,8 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
     return jdbcTemplate.batchUpdate(
         String.format(
             "INSERT INTO %s (id, version, entityStatus, ENTITY_UID, code, name, shortname, fType_id) " +
-                "VALUES ((SELECT COUNT(id)+1 FROM %s), 0, 0, ?, ?, ?, ?, ?)",
-            tableName(), tableName()
+                "VALUES (%s.NEXTVAL, 0, 0, ?, ?, ?, ?, ?)",
+            tableName(), sequenceName()
         ),
         new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {

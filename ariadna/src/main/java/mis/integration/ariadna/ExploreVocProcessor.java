@@ -8,4 +8,9 @@ public class ExploreVocProcessor extends AbstractVocProcessor {
   public String tableName() {
     return "DIR_RESEARCH_TARGET";
   }
+
+  @Override
+  public String sequenceName() {
+    return "DIR_RESEARCH_TARGETS_ID_SEQ";
+  }
 }

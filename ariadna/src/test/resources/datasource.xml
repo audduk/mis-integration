@@ -10,7 +10,7 @@
     <constructor-arg ref="dataSource"/>
   </bean>
 
-  <jdbc:embedded-database id="dataSource" generate-name="true">
+  <jdbc:embedded-database id="dataSource" generate-name="true" type="H2">
     <jdbc:script location="classpath:test-structure.sql"/>
   </jdbc:embedded-database>
 </beans>
