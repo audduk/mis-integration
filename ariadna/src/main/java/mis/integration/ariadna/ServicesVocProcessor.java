@@ -43,12 +43,17 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   @Override
   public void process(List<BaseItem> itemList) {
     super.process(itemList);
-    List<Pair<String, String>> specimens = new ArrayList<>(itemList.size() * 2);
+    final List<Pair<String, String>> specimens = getSpecimenPairs(itemList);
+    if (specimens.size() > 0)
+      updateSpecimens(specimens);
+  }
+
+  private List<Pair<String, String>> getSpecimenPairs(List<BaseItem> itemList) {
+    List<Pair<String, String>> specimens = new ArrayList<>(itemList.size());
     for (BaseItem service : itemList)
       for (BaseItem specimen : service.getSpecimens())
         specimens.add(Pair.of(service.getId(), specimen.getId()));
-    if (specimens.size() > 0)
-      updateSpecimens(specimens);
+    return specimens;
   }
 
   @Override
@@ -84,7 +89,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   }
 
   private void updateSpecimens(final List<Pair<String, String>> specimens) {
-    jdbcTemplate.execute("DELETE FROM LINK_A_BIOMATERIALS");
+    jdbcTemplate.execute(String.format("DELETE FROM LINK_A_BIOMATERIALS WHERE A_SERVICE_ID IN (SELECT id FROM DIR_MED_SIMPLE_SERVICE WHERE entitystatus=0 AND fType_id = %d)", fTypeId));
     jdbcTemplate.batchUpdate(
         "INSERT INTO LINK_A_BIOMATERIALS (A_SERVICE_ID, BIOMATERIAL_ID) VALUES (" +
             "(SELECT ID FROM DIR_MED_SIMPLE_SERVICE WHERE CODE=?)," +
