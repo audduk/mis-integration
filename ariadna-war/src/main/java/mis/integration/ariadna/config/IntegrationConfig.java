@@ -5,6 +5,7 @@ import mis.integration.ariadna.data.ReportRoot;
 import mis.integration.ariadna.data.RequestRoot;
 import mis.integration.ariadna.data.vocabulary.BaseVocabulary;
 import mis.integration.ariadna.data.vocabulary.ServiceVocabulary;
+import mis.integration.ariadna.file.Base64Encoder;
 import mis.integration.ariadna.file.PdfSplitter;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
@@ -95,6 +96,11 @@ public class IntegrationConfig {
   @Bean(name = "zipTransformer")
   public ZipTransformer zipTransformer() {
     return new ZipTransformer();
+  }
+
+  @Bean(name = "base64Encoder")
+  public Base64Encoder base64Encoder() {
+    return new Base64Encoder();
   }
 
   @Bean(name = "pdfSplitter")

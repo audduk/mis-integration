@@ -47,11 +47,7 @@
                                    charset="UTF-8"
                                    delete-files="true"/>
 
-  <channel id="lisReportStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
+  <channel id="lisReportStringChannel" datatype="java.lang.String"/>
 
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
@@ -79,7 +75,7 @@
   </channel>
 
   <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
-    <transformer ref="pdfSplitter"/>
+    <!--<transformer ref="pdfSplitter"/>-->
     <transformer ref="zipTransformer"/>
   </chain>
 
@@ -89,11 +85,15 @@
   <file:outbound-channel-adapter channel="misReportZipChannel"
                                  directory="${spy.report.into.mis}"/>
 
-  <!-- Записываем результат в очередь (входящуя) протоколов МИСа -->
-  <!--
-  <int-amqp:outbound-channel-adapter channel="misReportZipChannel"
-                                     amqp-template="rabbitTemplate"
-                                     exchange-name="${output.report.queue:prescription.complete}"/>
-  -->
+  <bridge input-channel="misReportZipChannel" output-channel="misReportBase64Channel"/>
 
+  <channel id="misReportBase64Channel"/>
+
+  <transformer input-channel="misReportBase64Channel" output-channel="misReportOutput"
+               ref="base64Encoder"/>
+
+  <!-- Записываем результат в очередь (входящуя) протоколов МИСа -->
+  <int-amqp:outbound-channel-adapter id="misReportOutput"
+                                     amqp-template="rabbitTemplate"
+                                     exchange-name="${output.report.exchange:prescription.complete.exchange}"/>
 </beans:beans>
