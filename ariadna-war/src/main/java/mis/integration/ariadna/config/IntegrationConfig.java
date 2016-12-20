@@ -10,6 +10,7 @@ import mis.integration.ariadna.file.PdfSplitter;
 import mis.integration.ariadna.file.ZipTransformer;
 import mis.lis.prescription.PrescriptionDTO;
 import mis.lis.report.Report;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.file.FileNameGenerator;
@@ -27,6 +28,13 @@ import java.util.regex.Pattern;
  */
 @Configuration
 public class IntegrationConfig {
+  @Value("${birt.server.host}")
+  private String host;
+  @Value("${birt.server.port}")
+  private String port;
+  @Value("${birt.document.file}")
+  private String filename;
+
   @Bean(name = "ariadnaJaxb2Marshaller")
   public Jaxb2Marshaller ariadnaJaxb2Marshaller() {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
@@ -105,7 +113,7 @@ public class IntegrationConfig {
 
   @Bean(name = "pdfSplitter")
   public PdfSplitter pdfSplitter() {
-    return new PdfSplitter();
+    return new PdfSplitter(host, port, filename);
   }
 
   @Bean(name = "serviceCodeFinder")

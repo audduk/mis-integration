@@ -75,7 +75,7 @@
   </channel>
 
   <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
-    <!--<transformer ref="pdfSplitter"/>-->
+    <transformer ref="pdfSplitter"/>
     <transformer ref="zipTransformer"/>
   </chain>
 
