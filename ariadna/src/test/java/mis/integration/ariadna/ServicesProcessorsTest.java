@@ -70,10 +70,10 @@ public class ServicesProcessorsTest extends AbstractAriadnaTest {
   }
 
   private void assertDataBaseState() {
-    Assert.assertEquals(103, JdbcTestUtils.countRowsInTable(jdbcTemplate, servicesVocProcessor.tableName()));
-    Assert.assertEquals(103, JdbcTestUtils.countRowsInTable(jdbcTemplate, "LINK_A_BIOMATERIALS"));
-    Assert.assertEquals(103, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "fType_id=1"));
-    Assert.assertEquals(103, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "name = shortname"));
+    Assert.assertEquals(97, JdbcTestUtils.countRowsInTable(jdbcTemplate, servicesVocProcessor.tableName()));
+    Assert.assertEquals(97, JdbcTestUtils.countRowsInTable(jdbcTemplate, "LINK_A_BIOMATERIALS"));
+    Assert.assertEquals(97, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "fType_id=1"));
+    Assert.assertEquals(97, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, servicesVocProcessor.tableName(), "name = shortname"));
   }
 
   @Test

@@ -19,9 +19,10 @@ public class CyclePhaseVocProcessor extends AbstractVocProcessor {
   }
 
   @Override
-  public void process(List<BaseItem> itemList) {
+  public List<BaseItem> process(List<BaseItem> itemList) {
     for (BaseItem item : itemList)
-      if ("4".equals(item.getId()))
-        super.process(item.getItems());
+      if ("4".equals(getCode(item)))
+        return super.process(item.getItems());
+    return null;
   }
 }

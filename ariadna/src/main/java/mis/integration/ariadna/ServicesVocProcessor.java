@@ -7,10 +7,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import javax.annotation.PostConstruct;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Обработка содержимого словаря "Услуги" ({@link mis.integration.ariadna.data.vocabulary.ServiceVocabulary})
@@ -31,6 +28,10 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
     return String.format(" e.fType_id = %d", fTypeId);
   }
 
+  protected String getCode(BaseItem item) {
+    return item.getExternalID();
+  }
+
   private Long fTypeId = -1L;
 
   @PostConstruct
@@ -41,18 +42,19 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
   }
 
   @Override
-  public void process(List<BaseItem> itemList) {
-    super.process(itemList);
-    final List<Pair<String, String>> specimens = getSpecimenPairs(itemList);
+  public List<BaseItem> process(List<BaseItem> itemList) {
+    List<BaseItem> clearedItems = super.process(itemList);
+    final List<Pair<String, String>> specimens = getSpecimenPairs(clearedItems);
     if (specimens.size() > 0)
       updateSpecimens(specimens);
+    return clearedItems;
   }
 
   private List<Pair<String, String>> getSpecimenPairs(List<BaseItem> itemList) {
     List<Pair<String, String>> specimens = new ArrayList<>(itemList.size());
     for (BaseItem service : itemList)
       for (BaseItem specimen : service.getSpecimens())
-        specimens.add(Pair.of(service.getId(), specimen.getId()));
+        specimens.add(Pair.of(getCode(service), specimen.getId()));
     return specimens;
   }
 
@@ -64,7 +66,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, items.get(i).getTitle());
             ps.setString(2, items.get(i).getTitle());
-            ps.setString(3, items.get(i).getId());
+            ps.setString(3, getCode(items.get(i)));
           }
         });
   }
@@ -80,7 +82,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
         new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, UUID.randomUUID().toString().toLowerCase());
-            ps.setString(2, items.get(i).getId());
+            ps.setString(2, getCode(items.get(i)));
             ps.setString(3, items.get(i).getTitle());
             ps.setString(4, items.get(i).getTitle());
             ps.setLong(5, fTypeId);
@@ -98,6 +100,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, specimens.get(i).getFirst());
             ps.setString(2, specimens.get(i).getSecond());
+            //System.out.println(String.format("--- %s\t%s", specimens.get(i).getFirst(), specimens.get(i).getSecond()));
           }
 
           public int getBatchSize() {

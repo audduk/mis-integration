@@ -3,7 +3,7 @@ CREATE TABLE DIR_MED_SIMPLE_SERVICE_FTYPE (
     entity_uid character varying(36) NOT NULL,
     version BIGINT,
     entitystatus BIGINT,
-    code character varying(255) NOT NULL,
+    code character varying(255) NOT NULL UNIQUE,
     name character varying(255) NOT NULL
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE DIR_BIOMATERIALS (
     entity_uid character varying(36) NOT NULL,
     version BIGINT,
     entitystatus BIGINT,
-    code character varying(255) NOT NULL,
+    code character varying(255) NOT NULL UNIQUE,
     name character varying(255) NOT NULL
 );
 CREATE SEQUENCE  "DIR_BIOMATERIAL_ID_SEQ"  MINVALUE 1 INCREMENT BY 1 ;
@@ -26,7 +26,7 @@ CREATE TABLE DIR_MED_SIMPLE_SERVICE (
     version BIGINT,
     entitystatus BIGINT,
     fType_id BIGINT REFERENCES DIR_MED_SIMPLE_SERVICE_FTYPE(ID),
-    code character varying(255) NOT NULL,
+    code character varying(255) NOT NULL UNIQUE,
     shortname character varying(255) NOT NULL,
     name character varying(255) NOT NULL
 );

@@ -7,10 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Обработка информации о словаре
@@ -26,39 +23,61 @@ public abstract class AbstractVocProcessor {
     return "";
   }
 
-  public void process(List<BaseItem> itemList) {
-    disableAllItems();
-    if (itemList.size() == 0)
-      return;;
-    batchUpdate(itemList);
+  protected String getCode(BaseItem item) {
+    return item.getId();
+  }
 
-    final List<String> affectedCodes = getAffectedCodes(getCodes(itemList));
-    final List<BaseItem> itemsToInsert = filterAffected(itemList, affectedCodes);
+  public List<BaseItem> process(List<BaseItem> itemList) {
+    List<BaseItem> crearedItems = clearList(itemList);
+    disableAllItems();
+    if (crearedItems.size() == 0)
+      return crearedItems;
+    batchUpdate(crearedItems);
+
+    final List<String> affectedCodes = getAffectedCodes(getCodes(crearedItems));
+    final List<BaseItem> itemsToInsert = filterAffected(crearedItems, affectedCodes);
     if (itemsToInsert.size() > 0)
       batchInsert(itemsToInsert);
+    return crearedItems;
+  }
+
+  protected List<BaseItem> clearList(List<BaseItem> itemList) {
+    List<BaseItem> result = new ArrayList<>(itemList.size());
+    final Set<String> usedCodes = new HashSet<>();
+    for (BaseItem item : itemList) {
+      final String code = getCode(item);
+      if (usedCodes.contains(code)) {
+        System.err.println("Duplicated " + code);
+        continue;
+      }
+      usedCodes.add(code);
+      result.add(item);
+    }
+    return result;
   }
 
   private List<String> getAffectedCodes(List<String> codeList) {
     List<String> result = new ArrayList<>();
     for (String code : codeList) {
       List<Map<String, Object>> rows = jdbcTemplate.queryForList(String.format("SELECT id FROM %s WHERE code = '%s'", tableName(), code));
+      //System.out.println(String.format("%d\tSELECT id FROM %s WHERE code = '%s'", rows.size(), tableName(), code));
       if (rows.size() > 0)
         result.add(code);
     }
     return result;
   }
 
-  protected List<String> getCodes(List<BaseItem> itemList) {
+  private List<String> getCodes(List<BaseItem> itemList) {
     List<String> result = new ArrayList<>(itemList.size());
     for (BaseItem item : itemList)
-      result.add(item.getId());
+      result.add(getCode(item));
     return result;
   }
 
-  protected List<BaseItem> filterAffected(List<BaseItem> itemList, List<String> codeList) {
-    List<BaseItem> result = new ArrayList<>(itemList.size() - codeList.size());
+  protected List<BaseItem> filterAffected(List<BaseItem> itemList, List<String> affectedCodes) {
+    List<BaseItem> result = new ArrayList<>(itemList.size() - affectedCodes.size());
     for (BaseItem anItemList : itemList) {
-      if (!codeList.contains(anItemList.getId()))
+      if (!affectedCodes.contains(getCode(anItemList)))
         result.add(anItemList);
     }
     return result;
@@ -70,7 +89,7 @@ public abstract class AbstractVocProcessor {
         new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, items.get(i).getTitle());
-            ps.setString(2, items.get(i).getId());
+            ps.setString(2, getCode(items.get(i)));
           }
         });
   }
@@ -85,7 +104,7 @@ public abstract class AbstractVocProcessor {
         new BatchStatementSetter(items) {
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, UUID.randomUUID().toString().toLowerCase());
-            ps.setString(2, items.get(i).getId());
+            ps.setString(2, getCode(items.get(i)));
             ps.setString(3, items.get(i).getTitle());
           }
         });
