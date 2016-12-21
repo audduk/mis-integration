@@ -30,7 +30,7 @@ public class ReportTransformer {
     return result;
   }
 
-  private static void fillReport(Report report, ReportGroup group, List<OrderItem> orderItems) {
+  private static void fillReport(Report report, ReportGroup group, List<OrderItem> orderItems) throws ReportDataException {
     final SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd hh:mm:ss YYYY");
 
     final Info info = report.getInfo();
@@ -61,11 +61,11 @@ public class ReportTransformer {
     }
   }
 
-  private static String getOrderCodeById(List<OrderItem> orderItems, Long id) {
+  private static String getOrderCodeById(List<OrderItem> orderItems, Long id) throws ReportDataException {
     for (OrderItem orderItem : orderItems)
       if (orderItem.getServiceID().equals(id))
         return orderItem.getServiceCode();
-    throw new RuntimeException("");
+    throw new ReportDataException("Некорректно задан идентификатор услуги", null);
   }
 
   /**
