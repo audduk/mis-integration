@@ -65,7 +65,7 @@
       <wire-tap channel="processVocChannel"/>
     </interceptors>
   </channel>
-  <service-activator input-channel="exploreVocChannel"
+  <service-activator input-channel="exploreVocChannel" output-channel="nullChannel"
                      expression="@exploreVocProcessor.process(payload.contents)"/>
 
   <!-- Обработка словаря "Группа состояний пациента" (фазы цикла) -->
@@ -74,7 +74,7 @@
       <wire-tap channel="processVocChannel"/>
     </interceptors>
   </channel>
-  <service-activator input-channel="conditionGroupVocChannel"
+  <service-activator input-channel="conditionGroupVocChannel" output-channel="nullChannel"
                      expression="@cyclePhaseProcessor.process(payload.contents)"/>
 
   <!-- Обработка словаря "Тип биоматериала" -->
@@ -83,7 +83,7 @@
       <wire-tap channel="processVocChannel"/>
     </interceptors>
   </channel>
-  <service-activator input-channel="specimenVocChannel"
+  <service-activator input-channel="specimenVocChannel" output-channel="nullChannel"
                      expression="@specimenVocProcessor.process(payload.contents)"/>
 
   <!-- Фиксируем факт обработки словаря -->

@@ -54,7 +54,7 @@
       <wire-tap channel="processVocChannel"/> <!-- see voc-integration.xml -->
     </interceptors>
   </channel>
-  <service-activator input-channel="servicesVocChannel"
+  <service-activator input-channel="servicesVocChannel" output-channel="nullChannel"
                      expression="@servicesVocProcessor.process(payload.services)"/>
 
 </beans:beans>
