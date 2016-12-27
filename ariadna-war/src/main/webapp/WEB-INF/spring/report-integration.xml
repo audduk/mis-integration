@@ -69,9 +69,9 @@
   </chain>
 
   <channel id="misReportStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
+    <!--<interceptors>-->
+      <!--<wire-tap channel="loggerChannel"/>-->
+    <!--</interceptors>-->
   </channel>
 
   <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
@@ -81,9 +81,10 @@
 
   <publish-subscribe-channel id="misReportZipChannel"/>
 
-  <!--TODO Тестовая конфигурация (сохранение в файл) -->
+  <!-- Тестовая конфигурация (сохранение в файл)
   <file:outbound-channel-adapter channel="misReportZipChannel"
                                  directory="${spy.report.into.mis}"/>
+  -->
 
   <bridge input-channel="misReportZipChannel" output-channel="misReportBase64Channel"/>
 

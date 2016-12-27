@@ -42,12 +42,12 @@
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
   <publish-subscribe-channel id="misPrescriptionStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
+    <!--<interceptors>-->
+      <!--<wire-tap channel="loggerChannel"/>-->
+    <!--</interceptors>-->
   </publish-subscribe-channel>
 
-  <!-- Шпионская конфигурация (сохранение в шпионский файл) -->
+  <!-- Шпионская конфигурация (сохранение в шпионский файл)
   <int-xml:xpath-header-enricher input-channel="misPrescriptionStringChannel" output-channel="spyStringChannel">
     <int-xml:header name="file_name" xpath-expression="/prescriptionDTO/prescription/id"/>
   </int-xml:xpath-header-enricher>
@@ -55,7 +55,7 @@
   <file:outbound-channel-adapter channel="spyStringChannel"
                                  filename-generator-expression="headers.get('file_name')+'.xml'"
                                  directory="${spy.request.from.mis}"/>
-  <!-- завершение шпионской конфигурации -->
+  завершение шпионской конфигурации -->
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <header-enricher>
@@ -70,9 +70,9 @@
   </chain>
 
   <publish-subscribe-channel id="observationStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
+    <!--<interceptors>-->
+      <!--<wire-tap channel="loggerChannel"/>-->
+    <!--</interceptors>-->
   </publish-subscribe-channel>
 
   <!-- Записываем результат преобразования в исходящие файлы (в соответствии с протоколом) -->
