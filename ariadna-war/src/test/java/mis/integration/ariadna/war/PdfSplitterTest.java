@@ -1,8 +1,8 @@
 package mis.integration.ariadna.war;
 
 import mis.integration.ariadna.file.PdfSplitter;
+import mis.integration.utils.Pair;
 import org.junit.Test;
-import org.springframework.data.util.Pair;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

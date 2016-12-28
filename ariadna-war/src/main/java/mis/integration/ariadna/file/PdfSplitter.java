@@ -2,15 +2,13 @@ package mis.integration.ariadna.file;
 
 import mis.integration.ariadna.data.Observation;
 import mis.integration.ariadna.data.Patient;
+import mis.integration.utils.Pair;
 import mis.lis.report.Result;
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.util.Pair;
 import org.springframework.integration.transformer.AbstractTransformer;
 import org.springframework.messaging.Message;
 
