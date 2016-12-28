@@ -1,7 +1,7 @@
 package mis.integration.ariadna;
 
 import mis.integration.ariadna.data.vocabulary.BaseItem;
-import org.springframework.data.util.Pair;
+import mis.integration.utils.Pair;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
 import javax.annotation.PostConstruct;
