@@ -42,7 +42,9 @@ public class ReportTransformer {
         continue;
       if (serviceId == null) {
         serviceId = observationResult.getOrderedServiceID();
-        service.setCode(getOrderCodeById(orderItems, serviceId));
+        final OrderItem orderItem = getOrderItemById(orderItems, serviceId);
+        service.setCode(orderItem.getServiceCode());
+        lis.setServiceName(orderItem.getService());
       }
       final Result.Service.Indicator indicator = new Result.Service.Indicator();
       indicator.setName(observationResult.getMeasurementName());
@@ -54,10 +56,10 @@ public class ReportTransformer {
     }
   }
 
-  private static String getOrderCodeById(List<OrderItem> orderItems, Long id) throws ReportDataException {
+  private static OrderItem getOrderItemById(List<OrderItem> orderItems, Long id) throws ReportDataException {
     for (OrderItem orderItem : orderItems)
       if (orderItem.getServiceID().equals(id))
-        return orderItem.getServiceCode();
+        return orderItem;
     throw new ReportDataException("Некорректно задан идентификатор услуги", null);
   }
 
