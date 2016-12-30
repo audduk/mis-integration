@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <text-property name="title" key="protokol_li">Протокол ЛИ</text-property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="recordId" id="398">
+            <property name="hidden">true</property>
+            <text-property name="helpText">ИД медицинской записи</text-property>
+            <text-property name="promptText">ИД медицинской записи</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">268481</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="patient" id="2404">
+            <property name="hidden">true</property>
+            <text-property name="helpText">ФИО пациента</text-property>
+            <text-property name="promptText">ФИО пациента</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Иванова Анна Васильевна</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="doctor" id="2655">
+            <property name="hidden">true</property>
+            <text-property name="promptText">ФИО врача-лаборанта</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Васильев Василий Васильевич</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="results" id="2666">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">[{"r1":"result1","r2":"x1","r3":"interval"},{"r1":"result2","r2":"x2","r3":"interval2"},{"r1":"result3","r2":"x3","r3":"interval3"}]</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="service" id="2747">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Биохимия крови</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="date" id="2759">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">-</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Scripted DS" id="2441"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Scripted Data Set" id="2442">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">r1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">r2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">r3</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">r1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">r2</property>
+                </structure>
+                <structure>
+                    <property name="columnName">r3</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'[{"r1":"result1","r2":"x1","r3":"interval"},{"r1":"result2","r2":"x2","r3":"interval2"}]'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">r1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">r2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">r3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Scripted DS</property>
+            <method name="open"><![CDATA[// формируем структуру списка
+var exp = eval('({"items":' + params["results"] + '})');
+referralValues = exp.items || []; // результаты исследований
+referralIndex = 0;   // используется в fetch для перебора значений
+]]></method>
+            <method name="fetch"><![CDATA[
+if (referralIndex >= referralValues.length)
+   return false;
+
+var obj = referralValues[referralIndex];
+
+row["r1"] = obj.r1;
+row["r2"] = obj.r2;
+row["r3"] = obj.r3;
+
+++referralIndex;
+return true;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">12pt</property>
+            <structure name="dateTimeFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">dd.MM.yyyy</property>
+            </structure>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">0.09375in</property>
+            <property name="headerHeight">0.5in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="2729">
+            <column id="2730"/>
+            <row id="2731">
+                <cell id="2732">
+                    <data id="2761">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">service</property>
+                                <expression name="expression" type="javascript">params["service"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">service</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <grid id="2734">
+            <property name="width">7.739583333333333in</property>
+            <column id="2735">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="2736"/>
+            <row id="2762">
+                <cell id="2763"/>
+                <cell id="2764">
+                    <data id="2760">
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">date</property>
+                                <expression name="expression" type="javascript">params["date"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">date</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="2748">
+                <cell id="2749">
+                    <label id="2740">
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Пациент</text-property>
+                    </label>
+                </cell>
+                <cell id="2750">
+                    <property name="paddingBottom">5pt</property>
+                    <data id="2741">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">patient</property>
+                                <expression name="expression" type="javascript">params["patient"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">patient</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <table id="2693">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">medium</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">medium</property>
+            <property name="dataSet">Scripted Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">r1</property>
+                    <text-property name="displayName">r1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["r1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">r2</property>
+                    <text-property name="displayName">r2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["r2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">r3</property>
+                    <text-property name="displayName">r3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["r3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="2706"/>
+            <column id="2707"/>
+            <column id="2708"/>
+            <header>
+                <row id="2694">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <cell id="2695">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <label id="2709">
+                            <property name="fontWeight">bold</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Показатель</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2696">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <label id="2711">
+                            <property name="fontWeight">bold</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Значение</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2697">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <label id="2713">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Референсный интервал</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="2698">
+                    <cell id="2699">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <data id="2710">
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="resultSetColumn">r1</property>
+                        </data>
+                    </cell>
+                    <cell id="2700">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <data id="2712">
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="resultSetColumn">r2</property>
+                        </data>
+                    </cell>
+                    <cell id="2701">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <data id="2714">
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="resultSetColumn">r3</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="2702">
+                    <cell id="2703"/>
+                    <cell id="2704"/>
+                    <cell id="2705"/>
+                </row>
+            </footer>
+        </table>
+        <grid id="2668">
+            <column id="2669"/>
+            <column id="2670"/>
+            <column id="2671"/>
+            <row id="2672">
+                <cell id="2673">
+                    <property name="paddingTop">5pt</property>
+                    <label id="2757">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Врач лаборатории:</text-property>
+                    </label>
+                </cell>
+                <cell id="2674">
+                    <property name="paddingTop">1pt</property>
+                    <text id="458">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[__________________________]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2675">
+                    <property name="paddingTop">1pt</property>
+                    <data id="2677">
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">doctor</property>
+                                <expression name="expression" type="javascript">params["doctor"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">doctor</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>
