@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
@@ -19,8 +22,15 @@ import java.io.File;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("dev")
-@ContextConfiguration("classpath:report-integration.xml")
+@ContextConfiguration(classes = ReportIntegrationContextIT.Config.class)
 public class ReportIntegrationContextIT extends AbstractAriadnaTest {
+
+  @Configuration
+  @PropertySource("classpath:application.properties")
+  @ImportResource(locations = {"classpath:report-integration.xml"})
+  public static class Config {
+  }
+
   @Autowired
   @Qualifier("lisReportFileInputChannel")
   private DirectChannel lisReportFileInputChannel;

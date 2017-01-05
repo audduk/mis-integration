@@ -3,7 +3,6 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
-             xmlns:jms="http://www.springframework.org/schema/integration/jms"
              xmlns:file="http://www.springframework.org/schema/integration/file"
              xsi:schemaLocation="
              http://www.springframework.org/schema/beans
@@ -12,8 +11,6 @@
              http://www.springframework.org/schema/integration/spring-integration.xsd
              http://www.springframework.org/schema/integration/xml
              http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
-             http://www.springframework.org/schema/integration/jms
-             http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
              http://www.springframework.org/schema/integration/file
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
   <!-- ************ Используемые бины ************ -->
@@ -35,8 +32,22 @@
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
-    <transformer ref="reportTransformer" method="transformToReport"/>
-    <splitter/>
+    <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
+    <header-enricher>
+      <header name="observation" expression="payload"/>
+    </header-enricher>
+    <splitter expression="payload.getReportGroups()"/>
+    <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
+    <header-enricher>
+      <header name="reportGroup" expression="payload"/>
+    </header-enricher>
+    <transformer expression="@reportTransformer.transformToReport(headers.get('observation'), payload)"/>
+    <header-enricher>
+      <!--Запоминаем полученный объект report (будет использоваться при построении pdf) -->
+      <header name="report" expression="payload"/>
+      <!-- Задаем имя "шпионского" zip-файла с протоколом, передаваемым в МИС -->
+      <header name="zip_name" expression="headers.get('file_name') + '-' + @serviceCodeFinder.getCode(payload) + '.zip'"/>
+    </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
   </chain>
@@ -46,6 +57,15 @@
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </channel>
+
+  <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
+    <transformer ref="pdfSplitter"/>
+    <transformer ref="zipTransformer"/>
+  </chain>
+  <publish-subscribe-channel id="misReportZipChannel"/>
+
+  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
+  <bridge input-channel="misReportZipChannel" output-channel="nullChannel"/>
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
@@ -82,14 +102,13 @@
     </interceptors>
   </channel>
 
+  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
+  <bridge input-channel="observationMd5Channel" output-channel="nullChannel"/>
+
   <!-- Конфигурация логгера -->
 
   <channel id="loggerChannel" datatype="java.lang.String"/>
 
   <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
-
-  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
-  <bridge input-channel="misReportStringChannel" output-channel="nullChannel"/>
-  <bridge input-channel="observationMd5Channel" output-channel="nullChannel"/>
 
 </beans:beans>

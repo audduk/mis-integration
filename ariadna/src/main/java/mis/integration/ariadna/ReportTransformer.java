@@ -8,26 +8,19 @@ import mis.integration.ariadna.exceptions.ReportDataException;
 import mis.lis.report.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Преобразование {@link Observation} в структуру протокола ЛИ МИС ({@link Report})
  */
 public class ReportTransformer {
-  public List<Report> transformToReport(Observation observation) throws ReportDataException {
-    final List<Report> result = new ArrayList<>();
+  public Report transformToReport(Observation observation, ReportGroup group) throws ReportDataException {
     final List<OrderItem> orderItems = observation.getOrderItems();
     if (orderItems == null || orderItems.isEmpty())
       throw new ReportDataException("Отсутствует содержание заказа (orderItems)", observation);
-    if (observation.getReportGroups() == null)
-      throw new ReportDataException("Не заполнено поле Observation.ReportsGroup", observation);
-    for (ReportGroup group : observation.getReportGroups()) {
-      final Report report = generateReport(observation);
-      fillReport(report, group, orderItems);
-      result.add(report);
-    }
-    return result;
+    final Report report = generateReport(observation);
+    fillReport(report, group, orderItems);
+    return report;
   }
 
   private static void fillReport(Report report, ReportGroup group, List<OrderItem> orderItems) throws ReportDataException {
