@@ -4,7 +4,6 @@ import mis.integration.ariadna.data.vocabulary.BaseItem;
 import mis.integration.utils.Pair;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
-import javax.annotation.PostConstruct;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
@@ -34,8 +33,7 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
 
   private Long fTypeId = -1L;
 
-  @PostConstruct
-  private void init() {
+  private void initFType() {
     List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT id FROM DIR_MED_SIMPLE_SERVICE_FTYPE WHERE code = '02'");
     if (rows.size() > 0)
       fTypeId = Long.parseLong(rows.get(0).get("id").toString());
@@ -43,6 +41,8 @@ public class ServicesVocProcessor extends AbstractVocProcessor {
 
   @Override
   public List<BaseItem> process(List<BaseItem> itemList) {
+    if (fTypeId.equals(-1L))
+      initFType();
     List<BaseItem> clearedItems = super.process(itemList);
     final List<Pair<String, String>> specimens = getSpecimenPairs(clearedItems);
     if (specimens.size() > 0)
