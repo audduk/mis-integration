@@ -56,8 +56,12 @@
     <header-enricher>
       <header name="observation" expression="payload"/>
     </header-enricher>
-    <transformer ref="reportTransformer" method="transformToReport"/>
-    <splitter/>
+    <splitter expression="payload.getReportGroups()"/>
+    <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
+    <header-enricher>
+      <header name="reportGroup" expression="payload"/>
+    </header-enricher>
+    <transformer expression="@reportTransformer.transformToReport(headers.get('observation'), payload)"/>
     <header-enricher>
       <!--Запоминаем полученный объект report (будет использоваться при построении pdf) -->
       <header name="report" expression="payload"/>
