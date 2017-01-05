@@ -7,15 +7,14 @@
     </encoder>
   </appender>
 
-  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
-    <file>${catalina.home}/logs/ariadna.log</file>
-    <encoder>
-      <Pattern>%date %level %logger{10} [%file:%line] %msg%n</Pattern>
-    </encoder>
-  </appender>
-
-  <appender name="sqlAppender" class="ch.qos.logback.core.FileAppender">
-    <file>${catalina.home}/logs/ariadna_sql.log</file>
+  <appender name="errorAppender" class="ch.qos.logback.core.FileAppender">
+    <!--http://logback.qos.ch/manual/filters.html#levelFilter-->
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <file>${catalina.home}/logs/ariadna_error.log</file>
     <encoder>
       <Pattern>%date %level %logger{10} [%file:%line] %msg%n</Pattern>
     </encoder>
@@ -28,24 +27,18 @@
     </encoder>
   </appender>
 
-  <!-- Hibernate loggers by http://docs.jboss.org/hibernate/orm/4.3/topical/html/logging/Logging.html -->
-  <logger name="org.hibernate" level="WARN" additivity="false">
-    <appender-ref ref="sqlAppender"/>
-    <appender-ref ref="consoleAppender"/>
-  </logger>
-  <logger name="java.sql" level="WARN">
-    <appender-ref ref="sqlAppender"/>
-    <appender-ref ref="consoleAppender"/>
-  </logger>
-
-  <logger name="org.springframework.integration.handler.LoggingHandler" level="DEBUG" additivity="false">
+  <logger name="org.springframework.integration.handler.LoggingHandler" level="DEBUG" additivity="true">
     <appender-ref ref="messagesAppender"/>
+    <appender-ref ref="errorAppender"/>
+  </logger>
+  <logger name="mis.integration.ariadna" level="DEBUG" additivity="true">
+    <appender-ref ref="messagesAppender"/>
+    <appender-ref ref="errorAppender"/>
   </logger>
 
   <!-- Root -->
   <root level="INFO">
     <appender-ref ref="consoleAppender"/>
-    <appender-ref ref="fileAppender"/>
   </root>
 
 </configuration>
