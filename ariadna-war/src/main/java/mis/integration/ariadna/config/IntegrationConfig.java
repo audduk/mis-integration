@@ -80,7 +80,7 @@ public class IntegrationConfig {
   private FileListFilter getFileListFilter(String ext) {
     CompositeFileListFilter<File> result = new CompositeFileListFilter<>();
     LastModifiedFileListFilter ageFilter = new LastModifiedFileListFilter();
-    ageFilter.setAge(120);
+    ageFilter.setAge(30);
     result.addFilter(ageFilter);
     result.addFilter(new RegexPatternFileListFilter(Pattern.compile(".*\\." + ext, Pattern.CASE_INSENSITIVE)));
     return result;
