@@ -21,23 +21,23 @@ import java.io.File;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("dev")
-@ContextConfiguration(classes = ReportIntegrationContextIT.Config.class)
-public class ReportIntegrationContextIT extends AbstractAriadnaTest {
+@ContextConfiguration(classes = RequestIntegrationContextIT.Config.class)
+public class RequestIntegrationContextIT extends AbstractAriadnaTest {
 
   @Configuration
   @PropertySource("classpath:application.properties")
-  @ImportResource(locations = {"classpath:report-integration.xml"})
+  @ImportResource(locations = {"classpath:request-integration.xml"})
   public static class Config {
   }
 
   @Autowired
-  @Qualifier("lisReportFileInputChannel")
-  private DirectChannel lisReportFileInputChannel;
+  @Qualifier("prescriptionFileInputChannel")
+  private DirectChannel prescriptionFileInputChannel;
 
   @Test
-  public void testLisReportFileTransformationAlgo() {
-    File file = getResourceFile("reports/15350001.xml");
+  public void testMisPrescriptionTransformationAlgo() {
+    File file = getResourceFile("requests/request.xml");
     Message<File> message = MessageBuilder.withPayload(file).build();
-    lisReportFileInputChannel.send(message);
+    prescriptionFileInputChannel.send(message);
   }
 }
