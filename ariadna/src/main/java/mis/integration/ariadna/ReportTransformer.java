@@ -28,9 +28,9 @@ public class ReportTransformer {
 
     final Info info = report.getInfo();
     info.setPhysician(group.getVerifierName());
-    info.setVerified((group.getVerifierID() != null)? group.getVerifierID().toString() : null);
+    info.setVerified(group.getVerifierID().toString());
     info.setDate(dateFormat.format(group.getFinishDate().getTime()));
-    info.setLogin("vrach_lis"); //логин по умолчанию "Врач лаборатории", будет в дальнейшем расширено (по необходимости)
+    info.setLogin(group.getVerifierID().toString()); //в соответствии с MIS-17916 может содержать Id врача
 
     final Report.Additional.Lis lis = report.getAdditional().getLis();
     final Result.Service service = new Result.Service();
@@ -60,7 +60,7 @@ public class ReportTransformer {
     for (OrderItem orderItem : orderItems)
       if (orderItem.getServiceID().equals(id))
         return orderItem;
-    throw new ReportDataException("Некорректно задан идентификатор услуги", null);
+    throw new ReportDataException(String.format("Отсутствует идентификатор услуги %d", id), null);
   }
 
   /**
