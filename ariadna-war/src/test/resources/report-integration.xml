@@ -67,48 +67,8 @@
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportZipChannel" output-channel="nullChannel"/>
 
-  <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
-
-  <!-- Тестовый блок -->
-  <channel id="prescriptionFileInputChannel"/>
-  <file:file-to-string-transformer input-channel="prescriptionFileInputChannel" output-channel="misPrescriptionStringChannel"
-                                   delete-files="false"/>
-
-  <channel id="misPrescriptionStringChannel">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
-
-  <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
-    <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
-    <transformer ref="prescriptionTransformer" method="transformToRequestRoot"/>
-    <int-xml:marshalling-transformer marshaller="ariadnaJaxb2Marshaller" result-type="StringResult"/>
-    <transformer expression="payload.toString()"/>
-  </chain>
-
-  <publish-subscribe-channel id="observationStringChannel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </publish-subscribe-channel>
-
-  <transformer input-channel="observationStringChannel" output-channel="observationMd5Channel"
-               ref="md5Transformer" method="transform"/>
-
-  <channel id="observationMd5Channel" datatype="java.lang.String">
-    <interceptors>
-      <wire-tap channel="loggerChannel"/>
-    </interceptors>
-  </channel>
-
-  <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
-  <bridge input-channel="observationMd5Channel" output-channel="nullChannel"/>
-
   <!-- Конфигурация логгера -->
-
   <channel id="loggerChannel" datatype="java.lang.String"/>
-
   <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
 
 </beans:beans>
