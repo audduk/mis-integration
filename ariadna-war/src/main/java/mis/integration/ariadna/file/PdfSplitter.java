@@ -94,8 +94,8 @@ public class PdfSplitter extends AbstractTransformer {
     if (!isEmpty(observation.getMisOrderID()))
       params.add(Pair.of("recordId", observation.getMisOrderID())); //идентификатор назначения Prescription (внутренний идентификатор заказа в МИС)
     final Patient patient = observation.getPatient();
-    params.add(Pair.of("patient", patient.getFamilyName().toUpperCase() + " " + patient.getGivenName().toUpperCase() + " " + patient.getMiddleName().toUpperCase()));
-    params.add(Pair.of("date", formanDate(group.getFinishDate())));
+    params.add(Pair.of("patient", getFio(patient)));
+    params.add(Pair.of("date", formatDate(group.getFinishDate())));
     final Report.Additional.Lis lis = report.getAdditional().getLis();
     params.add(Pair.of("service", lis.getServiceName()));
     String resultString = "";
@@ -113,7 +113,7 @@ public class PdfSplitter extends AbstractTransformer {
     return params;
   }
 
-  private static String formanDate(Calendar date){
+  private static String formatDate(Calendar date){
     if (date == null)
       return "-";
     final SimpleDateFormat format = new SimpleDateFormat("dd.MM.YYYY");
@@ -122,5 +122,9 @@ public class PdfSplitter extends AbstractTransformer {
 
   private static String get(String value) {
     return value != null? value : "";
+  }
+
+  private static String getFio(Patient patient) {
+    return get(patient.getFamilyName()) + " " + get(patient.getGivenName()) + " " + get(patient.getMiddleName());
   }
 }

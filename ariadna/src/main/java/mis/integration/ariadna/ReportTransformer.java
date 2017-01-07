@@ -16,11 +16,16 @@ import java.util.List;
 public class ReportTransformer {
   public Report transformToReport(Observation observation, ReportGroup group) throws ReportDataException {
     final List<OrderItem> orderItems = observation.getOrderItems();
-    if (orderItems == null || orderItems.isEmpty())
-      throw new ReportDataException("Отсутствует содержание заказа (orderItems)", observation);
-    final Report report = generateReport(observation);
-    fillReport(report, group, orderItems);
-    return report;
+    try {
+      if (orderItems == null || orderItems.isEmpty())
+        throw new ReportDataException("Отсутствует содержание заказа (orderItems)", observation);
+      final Report report = generateReport(observation);
+      fillReport(report, group, orderItems);
+      return report;
+    } catch (ReportDataException ex) {
+      final String message = String.format("Отчет ЛИ %s/%d. %s", observation.getMisOrderID(), observation.getId(), ex.getMessage());
+      throw new ReportDataException(message, ex.getObservation() != null ? ex.getObservation() : observation);
+    }
   }
 
   private static void fillReport(Report report, ReportGroup group, List<OrderItem> orderItems) throws ReportDataException {
