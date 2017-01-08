@@ -26,6 +26,9 @@
   <beans:import resource="logger-integration.xml"/>
   <context:property-placeholder location="classpath:application.properties"/>
 
+  <!-- poller по умолчанию необходим для работы с QueueChannel (см. lisReportStringChannel) -->
+  <poller id="defaultPoller" default="true" fixed-delay="50"/>
+
   <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
   <file:inbound-channel-adapter id="md5ReportInput" directory="file:${input.report.directory}"
                                 filter="md5FileFilter">
@@ -47,18 +50,24 @@
                                    charset="UTF-8"
                                    delete-files="true"/>
 
-  <channel id="lisReportStringChannel" datatype="java.lang.String"/>
+  <channel id="lisReportStringChannel" datatype="java.lang.String">
+    <queue capacity="5"/>
+  </channel>
 
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
+    <header-enricher>
+      <!--Запоминаем исходную xml-строку (здесь observation) -->
+      <header name="source_string" expression="payload"/>
+    </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
-    <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
     <header-enricher>
+      <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
       <header name="observation" expression="payload"/>
     </header-enricher>
     <splitter expression="payload.getReportGroups()"/>
-    <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
     <header-enricher>
+      <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
       <header name="reportGroup" expression="payload"/>
     </header-enricher>
     <transformer expression="@reportTransformer.transformToReport(headers.get('observation'), payload)"/>

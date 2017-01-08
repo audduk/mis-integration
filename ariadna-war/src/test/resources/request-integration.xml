@@ -15,6 +15,7 @@
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
   <!-- ************ Используемые бины ************ -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:import resource="common-integration.xml"/>
 
   <!-- Преобразование "Заявки на ЛИ", поступившей из МИС -->
 
@@ -23,17 +24,19 @@
   <file:file-to-string-transformer input-channel="prescriptionFileInputChannel" output-channel="misPrescriptionStringChannel"
                                    delete-files="false"/>
 
-  <channel id="misPrescriptionStringChannel">
+  <publish-subscribe-channel id="misPrescriptionStringChannel">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
-  </channel>
+  </publish-subscribe-channel>
 
   <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <header-enricher>
       <header name="output-file-code" method="computeValue">
         <beans:bean class="mis.integration.ariadna.FileCodeGenerator"/>
       </header>
+      <!--Запоминаем исходную xml-строку (здесь PrescriptionDTO) -->
+      <header name="source_string" expression="payload"/>
     </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
     <transformer ref="prescriptionTransformer" method="transformToRequestRoot"/>
@@ -58,9 +61,5 @@
 
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="observationMd5Channel" output-channel="nullChannel"/>
-
-  <!-- Конфигурация логгера -->
-  <channel id="loggerChannel" datatype="java.lang.String"/>
-  <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
 
 </beans:beans>

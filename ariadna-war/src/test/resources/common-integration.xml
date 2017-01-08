@@ -7,10 +7,11 @@
              http://www.springframework.org/schema/beans/spring-beans.xsd
              http://www.springframework.org/schema/integration
              http://www.springframework.org/schema/integration/spring-integration.xsd">
-
+  <!-- poller по умолчанию необходим для работы с QueueChannel (см. lisReportStringChannel) -->
+  <poller default="true" fixed-delay="50"/>
   <!-- Конфигурация логгера -->
   <channel id="loggerChannel" datatype="java.lang.String"/>
-  <logging-channel-adapter channel="loggerChannel" level="INFO"/>
+  <logging-channel-adapter channel="loggerChannel" level="WARN"/>
 
   <logging-channel-adapter channel="errorChannel" level="ERROR"
                            expression="payload.failedMessage.headers.get('source_string')"/>

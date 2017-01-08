@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,12 +32,13 @@ public class RequestIntegrationContextIT extends AbstractAriadnaTest {
 
   @Autowired
   @Qualifier("prescriptionFileInputChannel")
-  private DirectChannel prescriptionFileInputChannel;
+  private MessageChannel prescriptionFileInputChannel;
 
   @Test
-  public void testMisPrescriptionTransformationAlgo() {
+  public void testMisPrescriptionTransformationAlgo() throws InterruptedException {
     File file = getResourceFile("requests/request.xml");
     Message<File> message = MessageBuilder.withPayload(file).build();
     prescriptionFileInputChannel.send(message);
+    Thread.sleep(300); //требуется после добавления poller-а по умолчанию
   }
 }
