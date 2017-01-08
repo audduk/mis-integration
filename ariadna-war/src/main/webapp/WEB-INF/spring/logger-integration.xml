@@ -10,6 +10,9 @@
 
   <!-- Конфигурация логгера -->
   <channel id="loggerChannel" datatype="java.lang.String"/>
-  <logging-channel-adapter channel="loggerChannel" level="DEBUG"/>
+  <logging-channel-adapter channel="loggerChannel" level="INFO"/>
+
+  <logging-channel-adapter channel="errorChannel" level="ERROR"
+                           expression="payload.failedMessage.headers.get('source_string')"/>
 
 </beans:beans>

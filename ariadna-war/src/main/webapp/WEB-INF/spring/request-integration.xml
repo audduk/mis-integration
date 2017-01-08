@@ -62,6 +62,8 @@
       <header name="output-file-code" method="computeValue">
         <beans:bean class="mis.integration.ariadna.FileCodeGenerator"/>
       </header>
+      <!--Запоминаем исходную xml-строку (здесь PrescriptionDTO) -->
+      <header name="source_string" expression="payload"/>
     </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="misPrescriptionMarshaller"/>
     <transformer ref="prescriptionTransformer" method="transformToRequestRoot"/>
