@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,12 +32,13 @@ public class ReportIntegrationContextIT extends AbstractAriadnaTest {
 
   @Autowired
   @Qualifier("lisReportFileInputChannel")
-  private DirectChannel lisReportFileInputChannel;
+  private MessageChannel lisReportFileInputChannel;
 
   @Test
-  public void testLisReportFileTransformationAlgo() {
+  public void testLisReportFileTransformationAlgo() throws InterruptedException {
     File file = getResourceFile("reports/15350001.xml");
     Message<File> message = MessageBuilder.withPayload(file).build();
     lisReportFileInputChannel.send(message);
+    Thread.sleep(300); //требуется после добавления poller-а по умолчанию
   }
 }

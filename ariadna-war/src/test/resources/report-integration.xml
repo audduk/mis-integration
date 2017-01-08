@@ -15,6 +15,7 @@
              http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
   <!-- ************ Используемые бины ************ -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:import resource="common-integration.xml"/>
 
   <!-- Преобразование файла "Протокол ЛИ", поступившего из ЛИС -->
 
@@ -24,12 +25,17 @@
                                    delete-files="false"/>
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
+    <queue capacity="5"/>
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </channel>
 
   <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
+    <header-enricher>
+      <!--Запоминаем исходную xml-строку (здесь observation) -->
+      <header name="source_string" expression="payload"/>
+    </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
     <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
@@ -66,9 +72,5 @@
 
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportZipChannel" output-channel="nullChannel"/>
-
-  <!-- Конфигурация логгера -->
-  <channel id="loggerChannel" datatype="java.lang.String"/>
-  <logging-channel-adapter id="logger" channel="loggerChannel" level="WARN"/>
 
 </beans:beans>
