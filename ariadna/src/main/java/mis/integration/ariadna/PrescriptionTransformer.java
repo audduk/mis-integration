@@ -4,6 +4,8 @@ import mis.dto.common.DirectoryItemDTO;
 import mis.integration.ariadna.data.*;
 import mis.integration.ariadna.exceptions.PrescriptionDataException;
 import mis.lis.prescription.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -11,14 +13,18 @@ import java.util.*;
  * Преобразование назначения ({@link PrescriptionDTO} в структуру заказа ЛИ ЛИС ({@link RequestRoot})
  */
 public class PrescriptionTransformer {
+  private static Logger logger = LoggerFactory.getLogger(PrescriptionTransformer.class);
+
   public RequestRoot transformToRequestRoot(PrescriptionDTO prescription) throws PrescriptionDataException {
+    final String prescriptionId = prescription.getPrescription().getId().toString();
     try {
+      logger.info("Обработка заявки на ЛИ {}", prescriptionId);
       final Observation observation = getObservation(prescription);
       final RequestRoot requestRoot = new RequestRoot();
-      requestRoot.setObservations(Arrays.asList(observation));
+      requestRoot.setObservations(Collections.singletonList(observation));
       return requestRoot;
     } catch (PrescriptionDataException e) {
-      throw new PrescriptionDataException(prescription.getPrescription().getId().toString() + ". " + e.getMessage());
+      throw new PrescriptionDataException(prescriptionId + ". " + e.getMessage());
     }
   }
 
