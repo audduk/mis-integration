@@ -24,13 +24,13 @@
   <file:file-to-string-transformer input-channel="prescriptionFileInputChannel" output-channel="misPrescriptionStringChannel"
                                    delete-files="false"/>
 
-  <publish-subscribe-channel id="misPrescriptionStringChannel">
+  <publish-subscribe-channel id="misPrescriptionStringChannel" datatype="java.lang.String">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </publish-subscribe-channel>
 
-  <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
+  <chain id="mainRequestChain" input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <header-enricher>
       <header name="output-file-code" method="computeValue">
         <beans:bean class="mis.integration.ariadna.FileCodeGenerator"/>

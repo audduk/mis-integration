@@ -22,6 +22,7 @@
   <channel id="lisReportFileInputChannel"/>
 
   <file:file-to-string-transformer input-channel="lisReportFileInputChannel" output-channel="lisReportStringChannel"
+                                   charset="UTF-8"
                                    delete-files="false"/>
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
@@ -31,20 +32,20 @@
     </interceptors>
   </channel>
 
-  <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
+  <chain id="mainReportChain" input-channel="lisReportStringChannel" output-channel="misReportZipChannel">
     <header-enricher>
       <!--Запоминаем исходную xml-строку (здесь observation) -->
       <header name="source_string" expression="payload"/>
     </header-enricher>
     <int-xml:unmarshalling-transformer unmarshaller="ariadnaJaxb2Marshaller"/>
     <splitter expression="payload.getObservations()"/>
-    <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
     <header-enricher>
+      <!--Запоминаем исходный объект observation (будет использоваться при построении pdf) -->
       <header name="observation" expression="payload"/>
     </header-enricher>
     <splitter expression="payload.getReportGroups()"/>
-    <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
     <header-enricher>
+      <!--Запоминаем исходный объект reportGroup (будет использоваться при построении pdf) -->
       <header name="reportGroup" expression="payload"/>
     </header-enricher>
     <transformer expression="@reportTransformer.transformToReport(headers.get('observation'), payload)"/>
@@ -56,21 +57,22 @@
     </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
+    <transformer ref="pdfSplitter"/>
+    <transformer ref="zipTransformer"/>
   </chain>
 
-  <channel id="misReportStringChannel" datatype="java.lang.String">
+  <publish-subscribe-channel id="misReportZipChannel"/>
+
+  <transformer input-channel="misReportZipChannel" output-channel="misReportOutput"
+               ref="base64Encoder"/>
+
+  <channel id="misReportOutput">
     <interceptors>
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </channel>
 
-  <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
-    <transformer ref="pdfSplitter"/>
-    <transformer ref="zipTransformer"/>
-  </chain>
-  <publish-subscribe-channel id="misReportZipChannel"/>
-
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
-  <bridge input-channel="misReportZipChannel" output-channel="nullChannel"/>
+  <bridge input-channel="misReportOutput" output-channel="nullChannel"/>
 
 </beans:beans>

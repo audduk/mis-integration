@@ -54,7 +54,7 @@
     <queue capacity="5"/>
   </channel>
 
-  <chain input-channel="lisReportStringChannel" output-channel="misReportStringChannel">
+  <chain id="mainReportChain" input-channel="lisReportStringChannel" output-channel="misReportZipChannel">
     <header-enricher>
       <!--Запоминаем исходную xml-строку (здесь observation) -->
       <header name="source_string" expression="payload"/>
@@ -79,15 +79,6 @@
     </header-enricher>
     <int-xml:marshalling-transformer marshaller="misReportMarshaller" result-type="StringResult"/>
     <transformer expression="payload.toString()"/>
-  </chain>
-
-  <channel id="misReportStringChannel" datatype="java.lang.String">
-    <!--<interceptors>-->
-      <!--<wire-tap channel="loggerChannel"/>-->
-    <!--</interceptors>-->
-  </channel>
-
-  <chain input-channel="misReportStringChannel" output-channel="misReportZipChannel">
     <transformer ref="pdfSplitter"/>
     <transformer ref="zipTransformer"/>
   </chain>
@@ -99,11 +90,7 @@
                                  directory="${spy.report.into.mis}"/>
   -->
 
-  <bridge input-channel="misReportZipChannel" output-channel="misReportBase64Channel"/>
-
-  <channel id="misReportBase64Channel"/>
-
-  <transformer input-channel="misReportBase64Channel" output-channel="misReportOutput"
+  <transformer input-channel="misReportZipChannel" output-channel="misReportOutput"
                ref="base64Encoder"/>
 
   <!-- Записываем результат в очередь (входящуя) протоколов МИСа -->

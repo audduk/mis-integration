@@ -57,7 +57,7 @@
                                  directory="${spy.request.from.mis}"/>
   завершение шпионской конфигурации -->
 
-  <chain input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
+  <chain id="mainRequestChain" input-channel="misPrescriptionStringChannel" output-channel="observationStringChannel">
     <header-enricher>
       <header name="output-file-code" method="computeValue">
         <beans:bean class="mis.integration.ariadna.FileCodeGenerator"/>
