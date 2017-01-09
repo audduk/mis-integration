@@ -6,6 +6,8 @@ import mis.integration.ariadna.data.OrderItem;
 import mis.integration.ariadna.data.ReportGroup;
 import mis.integration.ariadna.exceptions.ReportDataException;
 import mis.lis.report.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  * Преобразование {@link Observation} в структуру протокола ЛИ МИС ({@link Report})
  */
 public class ReportTransformer {
+  private static Logger logger = LoggerFactory.getLogger(ReportTransformer.class);
+
   public Report transformToReport(Observation observation, ReportGroup group) throws ReportDataException {
     final List<OrderItem> orderItems = observation.getOrderItems();
     try {
@@ -45,6 +49,10 @@ public class ReportTransformer {
     for (ObservationResult observationResult : group.getResults()) {
       if ("H".equals(observationResult.getHeaderMark())) //пропускаем элементы-заголовки
         continue;
+      if (observationResult.getOrderedServiceID() == 0L) {
+        logger.error("Отсутствует привязка к услуге. {}", group.getResultDescription());
+        continue;
+      }
       if (serviceId == null) {
         serviceId = observationResult.getOrderedServiceID();
         final OrderItem orderItem = getOrderItemById(orderItems, serviceId);
@@ -59,6 +67,8 @@ public class ReportTransformer {
       indicator.setMin(observationResult.getNormMin());
       indicatorList.add(indicator);
     }
+    if (indicatorList.isEmpty())
+      throw new ReportDataException(String.format("%s. Отсутствуют результаты исследований", group.getResultDescription()), null);
   }
 
   private static OrderItem getOrderItemById(List<OrderItem> orderItems, Long id) throws ReportDataException {

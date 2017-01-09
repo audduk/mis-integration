@@ -32,12 +32,15 @@ public class ReportTransformerTest extends AbstractAriadnaTest {
     reportMarshaller = jc.createMarshaller();
   }
 
+  private List<Observation> getFileObservations(String path) throws JAXBException {
+    ReportRoot report = (ReportRoot) unmarshaller.unmarshal(getResourceAsStream(path));
+    return report.getObservations();
+  }
+
   @Test
   public void testTransformation() throws ReportDataException, JAXBException {
     ReportTransformer transformer = new ReportTransformer();
-
-    ReportRoot report = (ReportRoot) unmarshaller.unmarshal(getResourceAsStream("reports/15350001.xml"));
-    final List<Observation> observations = report.getObservations();
+    final List<Observation> observations = getFileObservations("reports/15350001.xml");
     for (Observation observation : observations) {
       for (ReportGroup reportGroup : observation.getReportGroups()) {
         final Report misReport = transformer.transformToReport(observation, reportGroup);
@@ -46,5 +49,14 @@ public class ReportTransformerTest extends AbstractAriadnaTest {
         System.out.println(writer.toString());
       }
     }
+  }
+
+  @Test(expected = ReportDataException.class)
+  public void testBadReports() throws ReportDataException, JAXBException {
+    ReportTransformer transformer = new ReportTransformer();
+    final List<Observation> observations = getFileObservations("reports/1-10-59.xml");
+    for (Observation observation : observations)
+      for (ReportGroup reportGroup : observation.getReportGroups())
+        transformer.transformToReport(observation, reportGroup);
   }
 }
