@@ -41,4 +41,12 @@ public class ReportIntegrationContextIT extends AbstractAriadnaTest {
     lisReportFileInputChannel.send(message);
     Thread.sleep(300); //требуется после добавления poller-а по умолчанию
   }
+
+  @Test
+  public void testBadLisReportFileTransformationAlgo() throws InterruptedException {
+    File file = getResourceFile("reports/1-10-59.xml");
+    Message<File> message = MessageBuilder.withPayload(file).build();
+    lisReportFileInputChannel.send(message);
+    Thread.sleep(1500); //требуется после добавления poller-а по умолчанию
+  }
 }
