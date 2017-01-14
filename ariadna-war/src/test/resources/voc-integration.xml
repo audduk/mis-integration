@@ -19,29 +19,14 @@
 
   <!-- Зависимости конфигурации (используемые бины) -->
   <beans:bean class="mis.integration.ariadna.config.IntegrationConfig"/>
+  <beans:bean class="mis.integration.ariadna.config.DataSourceConfig"/>
   <beans:bean class="mis.integration.ariadna.config.VocabularyConfig"/>
-  <beans:import resource="logger-integration.xml"/>
-  <context:property-placeholder location="classpath:application.properties"/>
+  <beans:import resource="common-integration.xml"/>
 
-  <!-- Вычитываем и удаляем md5-файлы из каталога входящих отчетов и удаляем их -->
-  <file:inbound-channel-adapter id="md5VocInput" directory="file:${input.voc.directory}"
-                                filter="md5FileFilter">
-    <poller fixed-delay="5000"/>
-  </file:inbound-channel-adapter>
-  <file:file-to-string-transformer input-channel="md5VocInput" output-channel="nullChannel"
-                                   delete-files="true"/>
-
-  <!-- Вычитываем xml-файлы из каталога входящих отчетов и обрабатываем их -->
-  <file:inbound-channel-adapter id="lisVocInput" directory="file:${input.voc.directory}"
-                                filter="xmlFileFilter">
-    <poller fixed-delay="5000"/>
-  </file:inbound-channel-adapter>
-
-  <!-- Преобразование файла "Словарь", поступившего из ЛИС -->
-
+  <channel id="lisVocInput"/>
   <file:file-to-string-transformer input-channel="lisVocInput" output-channel="lisVocStringChannel"
                                    charset="UTF-8"
-                                   delete-files="true"/>
+                                   delete-files="false"/>
 
   <channel id="lisVocStringChannel" datatype="java.lang.String"/>
 

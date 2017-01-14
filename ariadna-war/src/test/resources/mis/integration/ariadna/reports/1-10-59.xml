@@ -1,0 +1,1196 @@
+<MedapLisObservationReport>
+  <Observation>
+    <ID>33233</ID>
+    <IDs>120650</IDs>
+    <RegDate>2017-01-07T10:00:00</RegDate>
+    <Status>R</Status>
+    <FinishDate>2017-01-09T10:58:08</FinishDate>
+    <ReportDate>2017-01-09T10:58:38</ReportDate>
+    <OrderDate>2017-01-07</OrderDate>
+    <LisOrderID>33231</LisOrderID>
+    <Cito>false</Cito>
+    <SpecimenTypeID>7</SpecimenTypeID>
+    <SpecimenType>Вагинальный мазок</SpecimenType>
+    <CollectDate>2017-01-07T10:04:22</CollectDate>
+    <ResultToOrderingInstitution>true</ResultToOrderingInstitution>
+    <CustomerType>1</CustomerType>
+    <Patient>
+      <ID>445</ID>
+      <RegCode>468</RegCode>
+      <GivenName>а</GivenName>
+      <FamilyName>воронкова</FamilyName>
+      <MiddleName>а</MiddleName>
+      <Gender>F</Gender>
+      <BirthDate>1989-01-23</BirthDate>
+      <RegDate>2016-10-28</RegDate>
+      <Insurance>
+        <Company>
+        </Company>
+      </Insurance>
+      <Addresses>
+        <Address>
+          <AddressType>REG</AddressType>
+          <StringAddress></StringAddress>
+        </Address>
+        <Address>
+          <AddressType>LOC</AddressType>
+          <StringAddress></StringAddress>
+        </Address>
+      </Addresses>
+    </Patient>
+    <OrderingInstitution>
+      <ID>2259041</ID>
+      <LocalName>АОО</LocalName>
+      <FullName>Акушерское обсервационное отделение</FullName>
+      <Code>5</Code>
+      <Physician>
+      </Physician>
+    </OrderingInstitution>
+    <OrderInfo>
+      <item>
+        <ServiceID>17</ServiceID>
+        <ServiceCode>Л931001</ServiceCode>
+        <Service>Микроскопическое исследование влагалищных мазков</Service>
+        <Completed>1</Completed>
+      </item>
+    </OrderInfo>
+    <ObservationReport>
+      <ReportGroup>
+        <ResTableDescription>SysmexXS1000i Sysmex XS1000i</ResTableDescription>
+        <ReportSeq>1</ReportSeq>
+        <FinishDate>2017-01-08T11:28:29</FinishDate>
+        <VerifierID>15005</VerifierID>
+        <VerifierName>Гаврюшенко Екатерина Викторовна</VerifierName>
+        <Results>
+          <ObservationResult>
+            <SeqNo>1</SeqNo>
+            <MeasurementName>Клинический анализ крови (SysmexXS1000i)</MeasurementName>
+            <HeaderMark>H</HeaderMark>
+            <RepLevel>0</RepLevel>
+            <ReportFormat>BLANK</ReportFormat>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>2</SeqNo>
+            <Pathology>3</Pathology>
+            <MeasurementName>Лейкоциты (WBC)</MeasurementName>
+            <ResultText>26.2 10Е9/л (4.0 - 10.0)</ResultText>
+            <ResultValue>26.2</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>3.98</NormMin>
+            <NormMax>10.04</NormMax>
+            <NormText>(4.0 - 10.0)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:11</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>206</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>198</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>3</SeqNo>
+            <Pathology>-1</Pathology>
+            <MeasurementName>Эритроциты (RBC)</MeasurementName>
+            <ResultText>3.92 10Е12/л (3.9 - 5.2)</ResultText>
+            <ResultValue>3.92</ResultValue>
+            <Unit>10Е12/л</Unit>
+            <NormMin>3.93</NormMin>
+            <NormMax>5.22</NormMax>
+            <NormText>(3.9 - 5.2)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:11</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>217</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>209</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>4</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Гематокрит (HCT)</MeasurementName>
+            <ResultText>36.7 % (34.1 - 44.9)</ResultText>
+            <ResultValue>36.7</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>34.1</NormMin>
+            <NormMax>44.9</NormMax>
+            <NormText>(34.1 - 44.9)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>219</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>211</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>5</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Средний объём эритроцитов (MCV)</MeasurementName>
+            <ResultText>93.6 фл (79.4 - 94.8)</ResultText>
+            <ResultValue>93.6</ResultValue>
+            <Unit>фл</Unit>
+            <NormMin>79.4</NormMin>
+            <NormMax>94.8</NormMax>
+            <NormText>(79.4 - 94.8)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>220</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>212</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>6</SeqNo>
+            <Pathology>1</Pathology>
+            <MeasurementName>Среднее содержание гемоглобина (MCH)</MeasurementName>
+            <ResultText>33.9 пг (25.6 - 32.2)</ResultText>
+            <ResultValue>33.9</ResultValue>
+            <Unit>пг</Unit>
+            <NormMin>25.6</NormMin>
+            <NormMax>32.2</NormMax>
+            <NormText>(25.6 - 32.2)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>221</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>213</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>7</SeqNo>
+            <Pathology>1</Pathology>
+            <MeasurementName>Средняя концентрация гемоглобина (MCHC)</MeasurementName>
+            <ResultText>36.2 (32.2 - 35.5)</ResultText>
+            <ResultValue>36.2</ResultValue>
+            <Unit> </Unit>
+            <NormMin>32.2</NormMin>
+            <NormMax>35.5</NormMax>
+            <NormText>(32.2 - 35.5)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>222</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>214</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>8</SeqNo>
+            <Pathology>-1</Pathology>
+            <MeasurementName>Тромбоциты (PLT)</MeasurementName>
+            <ResultText>156.0 10Е9/л (182.0 - 369.0)</ResultText>
+            <ResultValue>156.0</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>182</NormMin>
+            <NormMax>369</NormMax>
+            <NormText>(182.0 - 369.0)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>225</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>217</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>9</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Стандартное отклонение ширины распределения эритроцитов (RDW-SD)</MeasurementName>
+            <ResultText>40.4 фл (36.4 - 46.3)</ResultText>
+            <ResultValue>40.4</ResultValue>
+            <Unit>фл</Unit>
+            <NormMin>36.4</NormMin>
+            <NormMax>46.3</NormMax>
+            <NormText>(36.4 - 46.3)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:08</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>224</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>216</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>10</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Коэффициент вариации ширины распределения эритроцитов (RDW-CV)</MeasurementName>
+            <ResultText>12.1 % (11.7 - 14.4)</ResultText>
+            <ResultValue>12.1</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>11.7</NormMin>
+            <NormMax>14.4</NormMax>
+            <NormText>(11.7 - 14.4)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:08</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>223</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>215</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>11</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Ширина распределения троибоцитов (PDW)</MeasurementName>
+            <ResultText>15.4 фл (9.0 - 17.0)</ResultText>
+            <ResultValue>15.4</ResultValue>
+            <Unit>фл</Unit>
+            <NormMin>9</NormMin>
+            <NormMax>17</NormMax>
+            <NormText>(9.0 - 17.0)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:08</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>227</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>219</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>12</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Средний объём тромбоцитов (MPV)</MeasurementName>
+            <ResultText>12.2 фл (9.0 - 13.0)</ResultText>
+            <ResultValue>12.2</ResultValue>
+            <Unit>фл</Unit>
+            <NormMin>9</NormMin>
+            <NormMax>13</NormMax>
+            <NormText>(9.0 - 13.0)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:07</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>226</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>218</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>13</SeqNo>
+            <Pathology>1</Pathology>
+            <MeasurementName>Относительное количество крупных тромбоцитов (P-LCR)</MeasurementName>
+            <ResultText>43.3 % (13.0 - 43.0)</ResultText>
+            <ResultValue>43.3</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>13</NormMin>
+            <NormMax>43</NormMax>
+            <NormText>(13.0 - 43.0)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:07</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>230</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>222</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>14</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Тромбокрит (PCT)</MeasurementName>
+            <ResultText>0.2 % (0.2 - 0.4)</ResultText>
+            <ResultValue>0.2</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>0.17</NormMin>
+            <NormMax>0.35</NormMax>
+            <NormText>(0.2 - 0.4)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:07</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>228</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>220</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>15</SeqNo>
+            <Pathology>2</Pathology>
+            <MeasurementName>Нейтрофилы (Neu%)</MeasurementName>
+            <ResultText>95.0 % (34.0 - 71.1)</ResultText>
+            <ResultValue>95.0</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>34</NormMin>
+            <NormMax>71.1</NormMax>
+            <NormText>(34.0 - 71.1)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>212</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>204</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>16</SeqNo>
+            <Pathology>3</Pathology>
+            <MeasurementName>Нейтрофилы (Neu#)</MeasurementName>
+            <ResultText>24.9 10Е9/л (1.6 - 6.1)</ResultText>
+            <ResultValue>24.9</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>1.56</NormMin>
+            <NormMax>6.13</NormMax>
+            <NormText>(1.6 - 6.1)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>207</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>199</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>17</SeqNo>
+            <Pathology>-3</Pathology>
+            <MeasurementName>Лимфоциты (Lym%)</MeasurementName>
+            <ResultText>2.9 % (19.3 - 51.7)</ResultText>
+            <ResultValue>2.9</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>19.3</NormMin>
+            <NormMax>51.7</NormMax>
+            <NormText>(19.3 - 51.7)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:10</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>213</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>205</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>18</SeqNo>
+            <Pathology>-2</Pathology>
+            <MeasurementName>Лимфоциты (Lym#)</MeasurementName>
+            <ResultText>0.76 10Е9/л (1.18 - 3.74)</ResultText>
+            <ResultValue>0.76</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>1.18</NormMin>
+            <NormMax>3.74</NormMax>
+            <NormText>(1.18 - 3.74)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>208</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>200</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>19</SeqNo>
+            <Pathology>-3</Pathology>
+            <MeasurementName>Моноциты (Mon%)</MeasurementName>
+            <ResultText>1.8 % (4.7 - 12.5)</ResultText>
+            <ResultValue>1.8</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>4.7</NormMin>
+            <NormMax>12.5</NormMax>
+            <NormText>(4.7 - 12.5)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>214</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>206</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>20</SeqNo>
+            <Pathology>2</Pathology>
+            <MeasurementName>Моноциты (Mon#)</MeasurementName>
+            <ResultText>0.47 10Е9/л (0.24 - 0.36)</ResultText>
+            <ResultValue>0.47</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>0.24</NormMin>
+            <NormMax>0.36</NormMax>
+            <NormText>(0.24 - 0.36)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>209</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>201</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>21</SeqNo>
+            <Pathology>-3</Pathology>
+            <MeasurementName>Эозинофилы (Eos%)</MeasurementName>
+            <ResultText>0.1 % (0.7 - 5.8)</ResultText>
+            <ResultValue>0.1</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>0.7</NormMin>
+            <NormMax>5.8</NormMax>
+            <NormText>(0.7 - 5.8)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>215</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>207</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>22</SeqNo>
+            <Pathology>-2</Pathology>
+            <MeasurementName>Эозинофилы (Eos#)</MeasurementName>
+            <ResultText>0.02 10Е9/л (0.04 - 0.36)</ResultText>
+            <ResultValue>0.02</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>0.04</NormMin>
+            <NormMax>0.36</NormMax>
+            <NormText>(0.04 - 0.36)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:08</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>210</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>202</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>23</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Базофилы (Bas%)</MeasurementName>
+            <ResultText>0.2 % (0.1 - 1.2)</ResultText>
+            <ResultValue>0.2</ResultValue>
+            <Unit>%</Unit>
+            <NormMin>0.1</NormMin>
+            <NormMax>1.2</NormMax>
+            <NormText>(0.1 - 1.2)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:09</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>216</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>208</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>24</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Базофилы (Bas#)</MeasurementName>
+            <ResultText>0.04 10Е9/л (0.0 - 0.1)</ResultText>
+            <ResultValue>0.04</ResultValue>
+            <Unit>10Е9/л</Unit>
+            <NormMin>0.01</NormMin>
+            <NormMax>0.08</NormMax>
+            <NormText>(0.0 - 0.1)</NormText>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-08T11:12:08</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>211</ResCode>
+            <Requested>true</Requested>
+            <MeasurementID>203</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>0</OrderedServiceID>
+            <OrderedWorkID>28</OrderedWorkID>
+          </ObservationResult>
+        </Results>
+      </ReportGroup>
+      <ReportGroup>
+        <ResTableDescription>Общая клиника</ResTableDescription>
+        <ReportSeq>2</ReportSeq>
+        <FinishDate>2017-01-09T10:58:07</FinishDate>
+        <VerifierID>15010</VerifierID>
+        <VerifierName>Ключникова Елена Михайловна</VerifierName>
+        <Results>
+          <ObservationResult>
+            <SeqNo>1</SeqNo>
+            <MeasurementName>(C)</MeasurementName>
+            <HeaderMark>H</HeaderMark>
+            <RepLevel>0</RepLevel>
+            <ReportFormat>BLANK</ReportFormat>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>2</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Лейкоциты</MeasurementName>
+            <ResultText>18-20 в п/зр</ResultText>
+            <ResultValue>18-20</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:35</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>305</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с01</MeasurementCode>
+            <MeasurementID>297</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>3</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Эпителий</MeasurementName>
+            <ResultText>5-6 в п/зр</ResultText>
+            <ResultValue>5-6</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:36</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>306</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с02</MeasurementCode>
+            <MeasurementID>298</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>4</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Кокки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:38</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>307</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с03</MeasurementCode>
+            <MeasurementID>299</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>5</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Палочки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:38</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>308</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с04</MeasurementCode>
+            <MeasurementID>300</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>6</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Коккобациллярная</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:38</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>413</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с04а</MeasurementCode>
+            <MeasurementID>405</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>7</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Трихомонады</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:39</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>309</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с05</MeasurementCode>
+            <MeasurementID>301</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>8</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Гонококки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:39</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>310</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с06</MeasurementCode>
+            <MeasurementID>302</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>9</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Дрожжевые клетки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:39</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>399</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с07</MeasurementCode>
+            <MeasurementID>391</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>10</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Ключевые клетки</MeasurementName>
+            <ResultText>не обнаружены в п/зр</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:40</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>402</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с08</MeasurementCode>
+            <MeasurementID>394</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>11</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Слизь</MeasurementName>
+            <ResultText>(-)</ResultText>
+            <ResultValue>(-)</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:40</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>405</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>с09</MeasurementCode>
+            <MeasurementID>397</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>12</SeqNo>
+            <MeasurementName>(V)</MeasurementName>
+            <HeaderMark>H</HeaderMark>
+            <RepLevel>0</RepLevel>
+            <ReportFormat>BLANK</ReportFormat>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>13</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Лейкоциты</MeasurementName>
+            <ResultText>10-12 в п/зр</ResultText>
+            <ResultValue>10-12</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:49</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>285</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в01</MeasurementCode>
+            <MeasurementID>277</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>14</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Эпителий</MeasurementName>
+            <ResultText>6-8 в п/зр</ResultText>
+            <ResultValue>6-8</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:51</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>286</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в02</MeasurementCode>
+            <MeasurementID>278</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>15</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Кокки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:52</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>287</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в03</MeasurementCode>
+            <MeasurementID>279</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>16</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Палочки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:53</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>288</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в04</MeasurementCode>
+            <MeasurementID>280</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>17</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Коккобациллярная</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:53</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>412</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в04а</MeasurementCode>
+            <MeasurementID>404</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>18</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Трихомонады</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:53</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>289</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в05</MeasurementCode>
+            <MeasurementID>281</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>19</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Гонококки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:54</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>290</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в06</MeasurementCode>
+            <MeasurementID>282</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>20</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Дрожжевые клетки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:54</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>398</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в07</MeasurementCode>
+            <MeasurementID>390</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>21</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Ключевые клетки</MeasurementName>
+            <ResultText>не обнаружены в п/зр</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:55</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>401</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в08</MeasurementCode>
+            <MeasurementID>393</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>22</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Слизь</MeasurementName>
+            <ResultText>(-)</ResultText>
+            <ResultValue>(-)</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:57:56</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>404</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>в09</MeasurementCode>
+            <MeasurementID>396</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>23</SeqNo>
+            <MeasurementName>(U)</MeasurementName>
+            <HeaderMark>H</HeaderMark>
+            <RepLevel>0</RepLevel>
+            <ReportFormat>BLANK</ReportFormat>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>24</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Лейкоциты</MeasurementName>
+            <ResultText>3-4 в п/зр</ResultText>
+            <ResultValue>3-4</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:00</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>298</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у01</MeasurementCode>
+            <MeasurementID>290</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>25</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Эпителий</MeasurementName>
+            <ResultText>2-3 в п/зр</ResultText>
+            <ResultValue>2-3</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:02</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>299</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у02</MeasurementCode>
+            <MeasurementID>291</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>26</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Кокки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:03</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>300</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у03</MeasurementCode>
+            <MeasurementID>292</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>27</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Палочки</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:03</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>301</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у04</MeasurementCode>
+            <MeasurementID>293</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>28</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Коккобациллярная</MeasurementName>
+            <ResultText>отсутствует</ResultText>
+            <ResultValue>отсутствует</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:03</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>414</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у04а</MeasurementCode>
+            <MeasurementID>406</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>29</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Трихомонады</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:04</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>302</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у05</MeasurementCode>
+            <MeasurementID>294</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>30</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Гонококки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:04</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>303</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у06</MeasurementCode>
+            <MeasurementID>295</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>31</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Дрожжевые клетки</MeasurementName>
+            <ResultText>не обнаружены</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:05</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>400</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у07</MeasurementCode>
+            <MeasurementID>392</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>32</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Ключевые клетки</MeasurementName>
+            <ResultText>не обнаружены в п/зр</ResultText>
+            <ResultValue>не обнаружены</ResultValue>
+            <Unit>в п/зр</Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:05</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>403</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у08</MeasurementCode>
+            <MeasurementID>395</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+          <ObservationResult>
+            <SeqNo>33</SeqNo>
+            <Pathology>0</Pathology>
+            <MeasurementName>Слизь</MeasurementName>
+            <ResultText>(-)</ResultText>
+            <ResultValue>(-)</ResultValue>
+            <Unit> </Unit>
+            <OperatorID>15010</OperatorID>
+            <OperatorName>Ключникова Елена Михайловна</OperatorName>
+            <OperatorCode>111</OperatorCode>
+            <RepLevel>1</RepLevel>
+            <FinishDate>2017-01-09T10:58:07</FinishDate>
+            <ResCount>1</ResCount>
+            <ResCode>406</ResCode>
+            <Requested>true</Requested>
+            <MeasurementCode>у09</MeasurementCode>
+            <MeasurementID>398</MeasurementID>
+            <ReportFormat>BLANK</ReportFormat>
+            <OrderedServiceID>17</OrderedServiceID>
+            <OrderedWorkID>44</OrderedWorkID>
+          </ObservationResult>
+        </Results>
+      </ReportGroup>
+    </ObservationReport>
+  </Observation>
+</MedapLisObservationReport>

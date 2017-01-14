@@ -52,6 +52,10 @@
 
   <channel id="lisReportStringChannel" datatype="java.lang.String">
     <queue capacity="5"/>
+    <interceptors>
+      <wire-tap channel="fileStartedChannel"/>
+      <!--<wire-tap channel="loggerChannel"/>-->
+    </interceptors>
   </channel>
 
   <chain id="mainReportChain" input-channel="lisReportStringChannel" output-channel="misReportZipChannel">
@@ -83,7 +87,12 @@
     <transformer ref="zipTransformer"/>
   </chain>
 
-  <publish-subscribe-channel id="misReportZipChannel"/>
+  <publish-subscribe-channel id="misReportZipChannel">
+    <interceptors>
+      <wire-tap channel="fileFinishedChannel"/>
+      <!--<wire-tap channel="loggerChannel"/>-->
+    </interceptors>
+  </publish-subscribe-channel>
 
   <!-- Тестовая конфигурация (сохранение в файл)
   <file:outbound-channel-adapter channel="misReportZipChannel"
@@ -97,4 +106,14 @@
   <int-amqp:outbound-channel-adapter id="misReportOutput"
                                      amqp-template="rabbitTemplate"
                                      exchange-name="${output.report.exchange:prescription.complete.exchange}"/>
+
+  <!-- Вспомогательная конфигурация (логгирование действий с файлами) -->
+  <channel id="fileStartedChannel"/>
+  <transformer input-channel="fileStartedChannel" output-channel="loggerChannel"
+               expression="headers.get('file_name') + ' - started'"/>
+
+  <channel id="fileFinishedChannel"/>
+  <transformer input-channel="fileFinishedChannel" output-channel="loggerChannel"
+               expression="headers.get('file_name') + ' - finished ' + headers.get('reportGroup').getResultDescription()"/>
+
 </beans:beans>

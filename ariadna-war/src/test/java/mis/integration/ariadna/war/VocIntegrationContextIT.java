@@ -21,32 +21,24 @@ import java.io.File;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("dev")
-@ContextConfiguration(classes = ReportIntegrationContextIT.Config.class)
-public class ReportIntegrationContextIT extends AbstractAriadnaTest {
+@ContextConfiguration(classes = VocIntegrationContextIT.Config.class)
+public class VocIntegrationContextIT extends AbstractAriadnaTest {
 
   @Configuration
   @PropertySource("classpath:application.properties")
-  @ImportResource(locations = {"classpath:report-integration.xml"})
+  @ImportResource(locations = {"classpath:voc-integration.xml"})
   public static class Config {
   }
 
   @Autowired
-  @Qualifier("lisReportFileInputChannel")
-  private MessageChannel lisReportFileInputChannel;
+  @Qualifier("lisVocInput")
+  private MessageChannel lisVocInput;
 
   @Test
-  public void testLisReportFileTransformationAlgo() throws InterruptedException {
-    File file = getResourceFile("reports/15350001.xml");
+  public void testUnknownVocProcessing() throws InterruptedException {
+    File file = getResourceFile("voc/16357001.xml");
     Message<File> message = MessageBuilder.withPayload(file).build();
-    lisReportFileInputChannel.send(message);
+    lisVocInput.send(message);
     Thread.sleep(300); //требуется после добавления poller-а по умолчанию
-  }
-
-  @Test
-  public void testBadLisReportFileTransformationAlgo() throws InterruptedException {
-    File file = getResourceFile("reports/1-10-59.xml");
-    Message<File> message = MessageBuilder.withPayload(file).build();
-    lisReportFileInputChannel.send(message);
-    Thread.sleep(1500); //требуется после добавления poller-а по умолчанию
   }
 }

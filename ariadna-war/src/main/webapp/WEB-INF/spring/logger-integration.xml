@@ -2,17 +2,32 @@
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
              xsi:schemaLocation="
              http://www.springframework.org/schema/beans
              http://www.springframework.org/schema/beans/spring-beans.xsd
              http://www.springframework.org/schema/integration
-             http://www.springframework.org/schema/integration/spring-integration.xsd">
+             http://www.springframework.org/schema/integration/spring-integration.xsd
+             http://www.springframework.org/schema/integration/file
+             http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
   <!-- Конфигурация логгера -->
   <channel id="loggerChannel" datatype="java.lang.String"/>
-  <logging-channel-adapter channel="loggerChannel" level="INFO"/>
+  <logging-channel-adapter channel="loggerChannel" level="WARN"/>
 
+  <!-- Обработка ошибок -->
+  <!-- Сообщение об ошибке обработки в логе -->
   <logging-channel-adapter channel="errorChannel" level="ERROR"
-                           expression="payload.failedMessage.headers.get('source_string')"/>
+                           expression="payload.failedMessage.headers.get('file_name') + ' - error'"/>
+  <!-- Сохранение ошибочного файла в шпионской директории  -->
+  <chain id="saveFileOnError" input-channel="errorChannel">
+    <header-enricher>
+      <header name="file_name" expression="payload.failedMessage.headers.get('file_name')"/>
+    </header-enricher>
+    <transformer expression="payload.failedMessage.headers.get('source_string')"/>
+    <file:outbound-channel-adapter charset="UTF-8"
+        directory="file:${spy.report.into.mis}"
+        filename-generator-expression="headers.get('file_name')"/>
+  </chain>
 
 </beans:beans>

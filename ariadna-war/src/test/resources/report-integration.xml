@@ -25,10 +25,13 @@
                                    charset="UTF-8"
                                    delete-files="false"/>
 
+  <!-- ++++++++++++ начало "боевой" конфигурации" ++++++++++++ -->
+
   <channel id="lisReportStringChannel" datatype="java.lang.String">
     <queue capacity="5"/>
     <interceptors>
-      <wire-tap channel="loggerChannel"/>
+      <wire-tap channel="fileStartedChannel"/>
+      <!--<wire-tap channel="loggerChannel"/>-->
     </interceptors>
   </channel>
 
@@ -61,7 +64,12 @@
     <transformer ref="zipTransformer"/>
   </chain>
 
-  <publish-subscribe-channel id="misReportZipChannel"/>
+  <publish-subscribe-channel id="misReportZipChannel">
+    <interceptors>
+      <wire-tap channel="fileFinishedChannel"/>
+      <!--<wire-tap channel="loggerChannel"/>-->
+    </interceptors>
+  </publish-subscribe-channel>
 
   <transformer input-channel="misReportZipChannel" output-channel="misReportOutput"
                ref="base64Encoder"/>
@@ -71,6 +79,17 @@
       <wire-tap channel="loggerChannel"/>
     </interceptors>
   </channel>
+
+  <!-- Вспомогательная конфигурация (логгирование действий с файлами) -->
+  <channel id="fileStartedChannel"/>
+  <transformer input-channel="fileStartedChannel" output-channel="loggerChannel"
+               expression="headers.get('file_name') + ' - started'"/>
+
+  <channel id="fileFinishedChannel"/>
+  <transformer input-channel="fileFinishedChannel" output-channel="loggerChannel"
+               expression="headers.get('file_name') + ' - finished ' + headers.get('reportGroup').getResultDescription()"/>
+
+  <!-- ++++++++++++ завершение "боевой" конфигурации" ++++++++++++ -->
 
   <!-- Тестовая конфигурация, избегаем ошибки незакрытого канала -->
   <bridge input-channel="misReportOutput" output-channel="nullChannel"/>
