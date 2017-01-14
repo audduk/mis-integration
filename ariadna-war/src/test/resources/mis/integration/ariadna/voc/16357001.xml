@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Vocabulary>
+ <Domain>DOCUMENT_TYPE</Domain>
+ <Contents>
+  <item>
+   <ID>1</ID>
+   <Title>Паспорт гражданина РФ</Title>
+  </item>
+  <item>
+   <ID>2</ID>
+   <Title>Паспорт гражданина СССР</Title>
+  </item>
+  <item>
+   <ID>3</ID>
+   <Title>Свидительство о рождении</Title>
+  </item>
+  <item>
+   <ID>4</ID>
+   <Title>Загранпаспорт гражданина СССР</Title>
+  </item>
+  <item>
+   <ID>5</ID>
+   <Title>Удостоверение личности офицера</Title>
+  </item>
+  <item>
+   <ID>6</ID>
+   <Title>Справка об освобождении</Title>
+  </item>
+  <item>
+   <ID>7</ID>
+   <Title>Военный билет солдата</Title>
+  </item>
+  <item>
+   <ID>8</ID>
+   <Title>Водительское удостоверение</Title>
+  </item>
+  <item>
+   <ID>9</ID>
+   <Title>Дипломатический паспорт гражданина РФ</Title>
+  </item>
+  <item>
+   <ID>10</ID>
+   <Title>Свидительство иммигранта</Title>
+  </item>
+  <item>
+   <ID>11</ID>
+   <Title>Вид на жительство</Title>
+  </item>
+  <item>
+   <ID>12</ID>
+   <Title>Удостоверение беженца в РФ</Title>
+  </item>
+  <item>
+   <ID>13</ID>
+   <Title>Временное удостоверение личности гр. РФ (Форма 2П)</Title>
+  </item>
+  <item>
+   <ID>14</ID>
+   <Title>Удостоверение аттестованного сотрудника ФСБ</Title>
+  </item>
+  <item>
+   <ID>15</ID>
+   <Title>Удостоверение служащего УВД</Title>
+  </item>
+  <item>
+   <ID>16</ID>
+   <Title>Удостоверение служащего УФСИН</Title>
+  </item>
+  <item>
+   <ID>17</ID>
+   <Title>Удостоверение служащего МСЧ</Title>
+  </item>
+  <item>
+   <ID>18</ID>
+   <Title>Иностранный паспорт</Title>
+  </item>
+  <item>
+   <ID>19</ID>
+   <Title>Загранпаспорт гражданина РФ</Title>
+  </item>
+  <item>
+   <ID>20</ID>
+   <Title>Паспорт моряка</Title>
+  </item>
+  <item>
+   <ID>21</ID>
+   <Title>Военный билет офицера запаса</Title>
+  </item>
+  <item>
+   <ID>22</ID>
+   <Title>Запрос АСБ при УВД МО</Title>
+  </item>
+  <item>
+   <ID>23</ID>
+   <Title>Иные документы удостоверяющие личность</Title>
+  </item>
+  <item>
+   <ID>24</ID>
+   <Title>Без документов</Title>
+  </item>
+ </Contents>
+</Vocabulary>
